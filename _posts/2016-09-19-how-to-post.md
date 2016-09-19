@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 如何使用 Jacman 主题
+title: 폿포슽포스팅 방방법 
 tags:
 - Jekyll
 - Jacman
@@ -11,7 +11,7 @@ description: Jacman 是一款扁平化，有着响应式设计的 Jekyll 主题�
 ## 주제 소개
 지킬-Jacman은 [지킬] (http://jekyllrb.com)가 신선하고 응답 테마를 설계했다, 풍부한 기능 지원 및 국내 서비스를 많이하고있다. Jacman는 [Jacman (https://github.com/wuchong/jacman)에서 이식하기 시작했다.
 
-<! - more ->
+<!-- more -->
 ## 구성 안내서
 
 Jacman 항목은 구성 등록 정보의 풍부한을 제공합니다, 당신은 주제의 자신의 정의를 얻을 수 있습니다. 테마의 루트 디렉토리에있는`_config.yml` 구성 파일입니다. 당신이 Jacman 전에 사용하는 경우 주요 조정에 대한 구성 파일이 업데이트는 또한 다음과 같은 지침에 따라 수정 될 필요합니다.
