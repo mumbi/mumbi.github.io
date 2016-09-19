@@ -1,17 +1,17 @@
 ---
 layout: post
-title: 어떻게 Jacman  사용하는 방법
+title: 如何使用 Jacman 主题
 tags:
 - Jekyll
 - Jacman
 categories: Jekyll
-description: Jacman은, 평면 인 지킬 테마 반응 형 디자인을 보유하고 있습니다. 공식 사이트는 Jacman 테마를 사용합니다. Hexo 테마에서 수정 Jacman 기반 Jacman. 당신은 더 많은 결과이 주제에 사이트 및 데모 미리보기를 방문 할 수 있습니다. 당신은 GitHub의 출판 문제에 오신 것을 환영합니다 질문이나 의견이있는 경우.
+description: Jacman 是一款扁平化，有着响应式设计的 Jekyll 主题。本站正式使用了 Jacman 主题。Jacman 基于 Jacman 的 Hexo 主题修改而来。你可以前往本站和 Demo 预览更多关于本主题的更多效果。如果你有任何问题或意见欢迎到 GitHub 发表 issue。
 ---
 
 ## 주제 소개
 지킬-Jacman은 [지킬] (http://jekyllrb.com)가 신선하고 응답 테마를 설계했다, 풍부한 기능 지원 및 국내 서비스를 많이하고있다. Jacman는 [Jacman (https://github.com/wuchong/jacman)에서 이식하기 시작했다.
 
-<! - 더 ->
+<! - more ->
 ## 구성 안내서
 
 Jacman 항목은 구성 등록 정보의 풍부한을 제공합니다, 당신은 주제의 자신의 정의를 얻을 수 있습니다. 테마의 루트 디렉토리에있는`_config.yml` 구성 파일입니다. 당신이 Jacman 전에 사용하는 경우 주요 조정에 대한 구성 파일이 업데이트는 또한 다음과 같은 지침에 따라 수정 될 필요합니다.
