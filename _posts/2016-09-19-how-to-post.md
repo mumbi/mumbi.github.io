@@ -1,12 +1,13 @@
 ---
-레이아웃 : 포스트
-제목 : 어떻게 Jacman 항목을 사용하는 방법
-태그 :
-- 지킬
+layout: post
+title: 어떻게 Jacman  사용하는 방법
+tags:
+- Jekyll
 - Jacman
-카테고리 : 지킬
-설명 : Jacman은, 평면 인 지킬 테마 반응 형 디자인을 보유하고 있습니다. 공식 사이트는 Jacman 테마를 사용합니다. Hexo 테마에서 수정 Jacman 기반 Jacman. 당신은 더 많은 결과이 주제에 사이트 및 데모 미리보기를 방문 할 수 있습니다. 당신은 GitHub의 출판 문제에 오신 것을 환영합니다 질문이나 의견이있는 경우.
+categories: Jekyll
+description: Jacman은, 평면 인 지킬 테마 반응 형 디자인을 보유하고 있습니다. 공식 사이트는 Jacman 테마를 사용합니다. Hexo 테마에서 수정 Jacman 기반 Jacman. 당신은 더 많은 결과이 주제에 사이트 및 데모 미리보기를 방문 할 수 있습니다. 당신은 GitHub의 출판 문제에 오신 것을 환영합니다 질문이나 의견이있는 경우.
 ---
+
 ## 주제 소개
 지킬-Jacman은 [지킬] (http://jekyllrb.com)가 신선하고 응답 테마를 설계했다, 풍부한 기능 지원 및 국내 서비스를 많이하고있다. Jacman는 [Jacman (https://github.com/wuchong/jacman)에서 이식하기 시작했다.
 
