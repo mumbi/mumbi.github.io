@@ -46,7 +46,7 @@ if (page.archive){
     {% if this_date_str != next_date_str %}
     <ul class="archive-list">
     <li class="archive-list-item">
-    <a class="archive-list-link" href="#{{ this_date | date: "%Y-%m" }}">{{ this_date | date: "%Y Year %m Month" }}</a>
+    <a class="archive-list-link" href="#{{ this_date | date: "%Y-%m" }}">{{ this_date | date: "%Y - %m" }}</a>
     <span class="archive-list-count">{{ count }}</span>
     {% assign count = 1 %}
     {% else %}
