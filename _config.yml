@@ -38,6 +38,8 @@ defaults:
 ##### Menu
 menu:
   Home: /
+  Categories: /categories
+  Tags: /tags
   Archives: /archives
   About: /about
 ## you can create `tags` and `categories` folders in `../source`.
