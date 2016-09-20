@@ -3,10 +3,10 @@ layout: default
 title: Blog
 ---
 <div class="well">
-    <nav >
-        <li>Categories</li>
-        <li>Tags</li>
-        <li>Archives</li>
+    <nav class="nav">
+        <li class="list-separator nav navbar-nav well well-primary post">Categories</li>
+        <li class="list-separator nav navbar-nav well well-primary post">Tags</li>
+        <li class="list-separator nav navbar-nav well well-primary post">Archives</li>
     </nav>
     <div class="list-group">
       {% for post in paginator.posts %}
