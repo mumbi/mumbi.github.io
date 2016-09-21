@@ -6,37 +6,37 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: mumbi's blog
-brief-intro: mumbi's techniques
+title: mumbi class
+brief-intro: code archive
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://mumbi.github.io" # the base hostname & protocol for your site
 
 permalink: /:year/:month/:day/:title/
 
 # other links
-twitter_username: gaohaoyang126
-facebook_username: gaohaoyang.water
-github_username:  Gaohaoyang
-email: gaohaoyang126@126.com
-weibo_username: 3115521wh
-zhihu_username: gaohaoyang
-linkedIn_username: gaohaoyang
-dribbble_username:
+#twitter_username: gaohaoyang126
+facebook_username: joonanism
+github_username:  mumbi
+email: mumbi@daum.net
+#weibo_username: 3115521wh
+#zhihu_username: gaohaoyang
+#linkedIn_username: gaohaoyang
+#dribbble_username:
 
-description_footer: description_footer
+description_footer: For with the heart man believeth unto righteousness; and with the mouth confession is made unto salvation Romans 10:10
 
 # comments
 # two ways to comment, only choose one, and use your own short name
 # 两种评论插件，选一个就好了，使用自己的 short_name
-duoshuo_shortname: #hygblog
-disqus_shortname: gaohaoyang
+#duoshuo_shortname: #hygblog
+disqus_shortname: mumbi-github-io
 
 # statistic analysis 统计代码
 # 百度统计 id，将统计代码替换为自己的百度统计id，即
 # hm.src = "//hm.baidu.com/hm.js?xxxxxxxxxxxx";
 # xxxxx字符串
-baidu_tongji_id: cf8506e0ef223e57ff6239944e5d46a4
-google_analytics_id: UA-72449510-4 # google 分析追踪id
+#baidu_tongji_id: cf8506e0ef223e57ff6239944e5d46a4
+google_analytics_id: UA-84562804-1 # google 分析追踪id
 
 # Build settings
 markdown: kramdown
