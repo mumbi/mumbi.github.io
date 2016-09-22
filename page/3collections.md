@@ -9,7 +9,7 @@ icon: bookmark
 {:toc}
 
 # C++
-- https://google.github.io/styleguide/cppguide.html
+* https://google.github.io/styleguide/cppguide.html
 
 # Comments
 
