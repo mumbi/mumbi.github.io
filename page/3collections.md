@@ -11,6 +11,6 @@ icon: bookmark
 # C++
 - https://google.github.io/styleguide/cppguide.html
 
-## Comments
+# Comments
 
 {% include comments.html %}
