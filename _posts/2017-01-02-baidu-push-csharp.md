@@ -35,8 +35,8 @@ foreach (KeyValuePair<string, string> pair in param)
 
 string baseString = _setting.Method + _setting.Url + parameterString + _setting.SecretKey;
 
-string espacedDataString = Uri.EscapeDataString(baseString);
-string urlencodedString = espacedDataString.Replace("%20", "+");
+string escapedDataString = Uri.EscapeDataString(baseString);
+string urlencodedString = escapedDataString.Replace("%20", "+");
 
 string hashedString = "";
 using (MD5 md5 = MD5.Create())
