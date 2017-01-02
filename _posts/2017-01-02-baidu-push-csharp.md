@@ -6,7 +6,7 @@ tags: baidu push c# dev
 ---
 
 ```c#
-pan t = DateTime.Now - new DateTime(1970, 1, 1);
+TimeSpan t = DateTime.Now - new DateTime(1970, 1, 1);
 int totalSeconds = (int)t.TotalSeconds;
 string timestamp = totalSeconds.ToString();                
 
@@ -18,19 +18,19 @@ param["msg"] = baiduNotification.Msg;
 
 if (baiduNotification.MsgType.HasValue)
 {
-		param["msg_type"] = baiduNotification.MsgType.Value.ToString();
+	param["msg_type"] = baiduNotification.MsgType.Value.ToString();
 }
 
 if (baiduNotification.DeployStatus.HasValue)
 {
-		param["deploy_status"] = baiduNotification.DeployStatus.Value.ToString();
+	param["deploy_status"] = baiduNotification.DeployStatus.Value.ToString();
 }                
 
 string parameterString = "";
 
 foreach (KeyValuePair<string, string> pair in param)
 {
-		parameterString += pair.Key + "=" + pair.Value;
+	parameterString += pair.Key + "=" + pair.Value;
 }
 
 string baseString = _setting.Method + _setting.Url + parameterString + _setting.SecretKey;
@@ -41,16 +41,16 @@ string urlencodedString = espacedDataString.Replace("%20", "+");
 string hashedString = "";
 using (MD5 md5 = MD5.Create())
 {
-		byte[] data = md5.ComputeHash(Encoding.UTF8.GetBytes(urlencodedString));
+	byte[] data = md5.ComputeHash(Encoding.UTF8.GetBytes(urlencodedString));
 
-			StringBuilder builder = new StringBuilder();
+	StringBuilder builder = new StringBuilder();
 
-				for (int i = 0; i < data.Length; ++i)
-						{
-									builder.Append(data[i].ToString("x2"));
-										}
+	for (int i = 0; i < data.Length; ++i)
+	{
+		builder.Append(data[i].ToString("x2"));
+	}
 
-					hashedString = builder.ToString();
+	hashedString = builder.ToString();
 }
 
 param["sign"] = hashedString;
@@ -58,10 +58,10 @@ param["sign"] = hashedString;
 string content = "";                
 foreach (KeyValuePair<string, string> pair in param)
 {
-		if (0 < content.Length)
-					content += "&";
+	if (0 < content.Length)
+		content += "&";
 
-			content += pair.Key + "=" + pair.Value;
+	content += pair.Key + "=" + pair.Value;
 }
 
 HttpClient client = new HttpClient();                    
