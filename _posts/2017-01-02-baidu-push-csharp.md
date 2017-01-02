@@ -4,11 +4,11 @@ title: baidu push c# 구현
 categories: dev
 tags: baidu push c# dev
 ---
-+ baidu push 구현
+# baidu push 구현
 - http://push.baidu.com/doc/restapi/restapi
 - http://push.baidu.com/doc/restapi/sdk_developer
 
-++ 유의할 점
+## 유의할 점
 - baidu 의 push server 가 php 로 구현되어있는지 php 의 urlencode 를 구현해야 한다. php 의 urlencode 는 공백(%20)을 '+' 로 대체한다. 
 
 ```c#
