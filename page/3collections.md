@@ -8,6 +8,10 @@ icon: bookmark
 * content
 {:toc}
 
-## Comments
+# C++
+* <https://google.github.io/styleguide/cppguide.html>
+* <https://raw.githubusercontent.com/google/styleguide/gh-pages/cpplint/cpplint.py>
+
+# Comments
 
 {% include comments.html %}
