@@ -1,0 +1,64 @@
+# auto 타입 추론 규칙
+
+ - auto의 타입 추론은 한가지 예외를 빼면 템플릿 타입 추론 규칙이 auto의 타입 추론 규칙이다.
+
+```c++
+template<typananem T>
+void f(ParamType param);	// ParamType 은 매개변수 param의 타입
+
+f(expr);			// expr 은 인수의 타입을 결정한다.
+```
+
+ - f를 호출할 때 컴파일러는 expr을 이용해서 T의 형식과 ParamType의 형식을 추론한다.
+ - auto 를 이용해서 변수를 선언 할 때 auto는 템플릿의 T와 동일한 역할을 하고, 변수의 형식 지정자가 ParamType의 역할을 한다. 
+ 
+```c++
+auto x = 27;		// auto는 T
+const auto cx = x;	// const auto 는 const T 와 같은 매개변수 타입 ParamType
+const auto& rx = x;	// const auto& 는 const T& 와 같은 매개변수 타입 ParamType
+```
+
+ - auto 는 uniform initialization 에서 의미가 달라진다.
+
+```c++
+// 모두 27 을 값으로 가지는 int
+int x1 = 27;
+int x2(27);
+int x3 = { 27 };
+int x4{ 27 };
+```
+
+```c++
+auto x1 = 27;		// int x1 = 27;
+auto x2(27);		// int x2(27);
+auto x3 = { 27 };	// std::initializer_list<int> x3 = { 27 };
+auto x4{ 27 };		// std::initializer_list<int> x4{ 27 }; c++11, c++14까지.. 이후에는 int x4{ 27 };
+```
+
+ - 템플릿은 uniform initialization 을 추론하지 못한다. 
+ 
+```c++
+auto x = { 11, 23, 9 };	// std::initializer_list<int> x = { 11, 23, 9 };
+ 
+template<typename T>
+void f(T param);
+ 
+f({ 11, 23, 9 });		// T를 추론할 수 없음. 오류
+```
+
+ - C++14 에서는 반환 타입을 auto로 지정해서 컴파일러가 추론할 수 있다.
+ - C++14 에서는 람다의 매개변수 선언에 auto를 사용할 수 있다.
+ - C++14 에서의 반환 타입 auto 와 람다의 매개변수 선언 auto는 템플릿 추론 규칙이 적용된다.
+ 
+```c++
+auto create_init_list()
+{
+	return { 1, 2, 3 };	// 템플릿 추론 규칙으로 추론 실패.
+}
+
+std::vector<int> v;
+
+auto reset_v = [&v](const auto& new_value) { v = new_value; };	// C++14
+
+reset_v({ 1, 2, 3 });
+```
