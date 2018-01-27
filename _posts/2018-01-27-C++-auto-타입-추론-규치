@@ -1,3 +1,10 @@
+---
+layout: post
+title: C++ auto 타입 추론 규칙
+categories: dev
+tags: c++ auto 타입 추론
+---
+
 # auto 타입 추론 규칙
 
  - auto의 타입 추론은 한가지 예외를 빼면 템플릿 타입 추론 규칙이 auto의 타입 추론 규칙이다.
