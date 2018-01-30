@@ -2,7 +2,7 @@
 layout: post
 title: baidu push c# 구현
 categories: dev
-tags: baidu push c# dev
+tags: [baidu, push, c#]
 ---
 # reference
 - [http://push.baidu.com/doc/restapi/restapi](http://push.baidu.com/doc/restapi/sdk_developer)
