@@ -6,6 +6,11 @@ tags: c++
 ---
 
 # 완벽 전달의 실패
+ - 중괄호 초기치
+ - null 포인터를 뜻하는 0
+ - 정의가 없이 선언만 된 정수 static const 및 constexpr 멤버 변수
+ - overloading 된 함수 이름과 템플릿 함수 이름
+ - 비트필드
  
 
  
