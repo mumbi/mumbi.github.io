@@ -1,0 +1,232 @@
+---
+layout: post
+title: 방화벽 규칙(firewall rule)
+categories: ops
+tags: [방화벽, 규칙, firewall, rule]
+---
+
+# 원격 서비스 관리
+ - 원격 서비스 관리(RPC-EPMAP)
+ - 원격 서비스 관리(NP-In)
+ - 원격 서비스 관리(RPC)
+
+# mDNS
+ - mDNS(Udp-out)
+ - mDNS(Udp-in)
+
+# 핵심 네트워킹
+ - 핵심 네트워킹 - 그룹 정책(LSASS-Out)
+ - 핵심 네트워킹 - DNS(UDP-Out)
+ - 핵심 네트워킹 - 그룹 정책(TCP-Out)
+ - 핵심 네트워킹 - 그룹 정책(NP-Out)
+ - 핵심 네트워킹 - IPv6(IPv6-Out)
+ - 핵심 네트워킹 - IPv6(IPv6-In)
+ - 핵심 네트워킹 - IPHTTPS(TCP-Out)
+ - 핵심 네트워킹 - IPHTTPS(TCP-In)
+ - 핵심 네트워킹 - Teredo(UDP-Out)
+ - 핵심 네트워킹 - Teredo(UDP-In)
+ - 핵심 네트워킹 - IPv6용 DHCP(Dynamic Host Configuration Protocol)(DHCPV6-Out)
+ - 핵심 네트워킹 - IPv6용 DHCP(Dynamic Host Configuration Protocol)(DHCPV6-In)
+ - 핵심 네트워킹 - DHCP(Dynamic Host Configuration Protocol)(DHCP-Out)
+ - 핵심 네트워킹 - DHCP(Dynamic Host Configuration Protocol)(DHCP-In)
+ - 핵심 네트워킹 - IGMP(Internet Group Management Protocol )(IGMP-Out)
+ - 핵심 네트워킹 - IGMP(Internet Group Management Protocol )(IGMP-In)
+ - 핵심 네트워킹 - 대상에 연결할 수 없음 조각화 필요(ICMPv4-In)
+ - 핵심 네트워킹 - 멀티캐스트 수신기 완료(ICMPv6-Out)
+ - 핵심 네트워킹 - 멀티캐스트 수신기 완료(ICMPv6-In)
+ - 핵심 네트워킹 - 멀티캐스트 수신기 보고서 v2(ICMPv6-Out)
+ - 핵심 네트워킹 - 멀티캐스트 수신기 보고서 v2(ICMPv6-In)
+ - 핵심 네트워킹 - 멀티캐스트 수신기 보고서(ICMPv6-Out)
+ - 핵심 네트워킹 - 멀티캐스트 수신기 보고서(ICMPv6-In)
+ - 핵심 네트워킹 - 멀티캐스트 수신기 쿼리(ICMPv6-Out)
+ - 핵심 네트워킹 - 멀티캐스트 수신기 쿼리(ICMPv6-In)
+ - 핵심 네트워킹 - 라우터 요청(ICMPv6-Out)
+ - 핵심 네트워킹 - 라우터 요청(ICMPv6-In)
+ - 핵심 네트워킹 - 라우터 알림(ICMPv6-Out)
+ - 핵심 네트워킹 - 라우터 알림(ICMPv6-In)
+ - 핵심 네트워킹 - 네트워크 환경 검색 알림(ICMPv6-Out)
+ - 핵심 네트워킹 - 네트워크 환경 검색 알림(ICMPv6-In)
+ - 핵심 네트워킹 - 네트워크 환경 검색 요청(ICMPv6-Out)
+ - 핵심 네트워킹 - 네트워크 환경 검색 요청(ICMPv6-In)
+ - 핵심 네트워킹 - 매개 변수 문제(ICMPv6-Out)
+ - 핵심 네트워킹 - 매개 변수 문제(ICMPv6-In)
+ - 핵심 네트워킹 - 시간 초과됨(ICMPv6-Out)
+ - 핵심 네트워킹 - 시간 초과됨(ICMPv6-In)
+ - 핵심 네트워킹 - 패킷이 너무 큼(ICMPv6-Out)
+ - 핵심 네트워킹 - 패킷이 너무 큼(ICMPv6-In)
+ - 핵심 네트워킹 - 대상에 연결할 수 없음(ICMPv6-In)
+
+# 성능 로그 및 경고
+ - 성능 로그 및 경고(DCOM-In)
+ - 성능 로그 및 경고(TCP-In)
+ - 성능 로그 및 경고(DCOM-In)
+ - 성능 로그 및 경고(TCP-In)
+ 
+# 키 관리 서비스
+ - 키 관리 서비스(TCP-In)
+
+# 원격 이벤트 로그 관리
+ - 원격 이벤트 로그 관리(RPC-EPMAP)
+ - 원격 이벤트 로그 관리(NP-In)
+ - 원격 이벤트 로그 관리(RPC)
+
+# iSCSI 서비스
+ - iSCSI 서비스(TCP-Out)
+ - iSCSI 서비스(TCP-In)
+
+# 원격 볼륨 관리
+ - 원격 볼륨 관리(RPC-EPMAP)
+ - 원격 볼륨 관리 - 가상 디스크 서비스 로더(RPC)
+ - 원격 볼륨 관리 - 가상 디스크 서비스(RPC)
+
+# 라우팅 및 원격 액세스
+ - 라우팅 및 원격 액세스(PPTP-Out)
+ - 라우팅 및 원격 액세스(PPTP-In)
+ - 라우팅 및 원격 액세스(L2TP-Out)
+ - 라우팅 및 원격 액세스(L2TP-In)
+ - 라우팅 및 원격 액세스(GRE-Out)
+ - 라우팅 및 원격 액세스(GRE-In)
+
+# DNS Proxy Service
+ - All Outgoing (UDP)
+ - All Outgoing (TCP)
+ - DNS Proxy (UDP, Incoming)
+ - DNS Proxy (TCP, Incoming)
+
+# 원격 데스크톱
+ - 원격 데스크톱 - 섀도(TCP-In)
+ - 원격 데스크톱 - 사용자 모드(UDP-In)
+ - 원격 데스크톱 - 사용자 모드(TCP-In)
+
+# Windows 원격 관리
+ - Windows 원격 관리 - 호환 모드(HTTP-In)
+ - Windows 원격 관리(HTTP-In)
+ - Windows 원격 관리(HTTP-In)
+
+# 원격 예약된 작업 관리
+ - 원격 예약된 작업 관리(RPC-EPMAP)
+ - 원격 예약된 작업 관리(RPC)
+
+# 네트워크 컨트롤러 호스트 에이전트 방화벽 그룹
+ - TLS(TCP-In)를 통한 네트워크 컨트롤러 호스트 에이전트 WCF
+ - 네트워크 컨트롤러 호스트 에이전트 WCF(TCP-In)
+ - 네트워크 컨트롤러 호스트 에이전트(TCP-In)
+
+# SMBDirect를 통한 파일 및 프린터 공유
+ - SMBDirect(iWARP-In)를 통한 파일 및 프린터 공유
+
+# WMI(Windows Management Instrumentation)
+ - WMI(Windows Management Instrumentation)(ASync-In)
+ - WMI(Windows Management Instrumentation)(WMI-Out)
+ - WMI(Windows Management Instrumentation)(WMI-In)
+ - WMI(Windows Management Instrumentation)(DCOM-In)
+
+# Windows 방화벽 원격 관리
+ - Windows 방화벽 원격 관리(RPC-EPMAP)
+ - Windows 방화벽 원격 관리(RPC)
+
+# DTC(Distributed Transaction Coordinator)
+ - DTC(Distributed Transaction Coordinator)(RPC-EPMAP)
+ - DTC(Distributed Transaction Coordinator)(RPC)
+ - DTC(Distributed Transaction Coordinator)(TCP-Out)
+ - DTC(Distributed Transaction Coordinator)(TCP-In)
+
+# Hyper-V
+ - Hyper-V 복제본 HTTPS 수신기(TCP-In)
+ - Hyper-V 복제본 HTTP 수신기(TCP-In)
+ - Hyper-V (REMOTE_DESKTOP_TCP_IN)
+ - Hyper-V(MIG-TCP-In)
+ - Hyper-V (RPC)
+ - Hyper-V (RPC-EPMAP)
+ - Hyper-V - WMI(Async-In)
+ - Hyper-V - WMI(TCP-Out)
+ - Hyper-V - WMI(TCP-In)
+ - Hyper-V - WMI(DCOM-In)
+
+# TPM 가상 스마트 카드 관리
+ - TPM 가상 스마트 카드 관리(TCP-Out)
+ - TPM 가상 스마트 카드 관리(TCP-In)
+ - TPM 가상 스마트 카드 관리(DCOM-In)
+ - TPM 가상 스마트 카드 관리(TCP-Out)
+ - TPM 가상 스마트 카드 관리(TCP-In)
+ - TPM 가상 스마트 카드 관리(DCOM-In)
+
+# Hyper-V 관리 클라이언트
+ - Hyper-V 관리 클라이언트 - WMI (Async-In)
+ - Hyper-V 관리 클라이언트 - WMI (TCP-Out)
+ - Hyper-V 관리 클라이언트 - WMI (TCP-In)
+ - Hyper-V 관리 클라이언트 - WMI (DCOM-In)
+
+# 소프트웨어 부하 분산 장치
+ - 소프트웨어 부하 분산 장치 멀티플렉서(TCP-In)
+
+# 파일 및 프린터 공유
+ - 파일 및 프린터 공유LLMNR-UDP-Out)
+ - 파일 및 프린터 공유(LLMNR-UDP-In)
+ - 파일 및 프린터 공유(에코 요청 - ICMPv6-Out)
+ - 파일 및 프린터 공유(에코 요청 - ICMPv6-In)
+ - 파일 및 프린터 공유(에코 요청 - ICMPv4-Out)
+ - 파일 및 프린터 공유(에코 요청 - ICMPv4-In)
+ - 파일 및 프린터 공유(스풀러 서비스 - RPC-EPMAP)
+ - 파일 및 프린터 공유(스풀러 서비스 - RPC)
+ - 파일 및 프린터 공유(NB-Datagram-Out)
+ - 파일 및 프린터 공유(NB-Datagram-In)
+ - 파일 및 프린터 공유(NB-Name-Out)
+ - 파일 및 프린터 공유(NB-Name-In)
+ - 파일 및 프린터 공유(SMB-Out)
+ - 파일 및 프린터 공유(SMB-In)
+ - 파일 및 프린터 공유(NB-Session-Out)
+ - 파일 및 프린터 공유(NB-Session-In)
+
+# Netlogon 서비스
+ - Netlogon 서비스 인증(RPC)
+ - Netlogon 서비스(NP-In)
+
+# AllJoyn 라우터
+ - AllJoyn 라우터(UDP-Out)
+ - AllJoyn 라우터(UDP-In)
+ - AllJoyn 라우터(TCP-Out)
+ - AllJoyn 라우터(TCP-In)
+
+# 네트워크 검색
+ - 네트워크 검색(Pub WSD-Out)
+ - 네트워크 검색(Pub-WSD-In)
+ - 네트워크 검색(LLMNR-UDP-Out)
+ - 네트워크 검색(LLMNR-UDP-In)
+ - 네트워크 검색(WSD-Out)
+ - 네트워크 검색(WSD-In)
+ - 네트워크 검색(UPnPHost-Out)
+ - 네트워크 검색(SSDP-Out)
+ - 네트워크 검색(SSDP-In)
+ - 네트워크 검색(WSD Events-Out)
+ - 네트워크 검색(WSD Events-In)
+ - 네트워크 검색(WSD EventsSecure-Out)
+ - 네트워크 검색(WSD EventsSecure-In)
+ - 네트워크 검색(NB-Datagram-Out)
+ - 네트워크 검색(NB-Datagram-In)
+ - 네트워크 검색(NB-Name-Out)
+ - 네트워크 검색(NB-Name-In)
+ - 네트워크 검색(UPnP-Out)
+ - 네트워크 검색(UPnP-In)
+
+# 원격 이벤트 모니터
+ - 원격 이벤트 모니터(RPC-EPMAP)
+ - 원격 이벤트 모니터(RPC)
+
+# DiagTrack
+ - Connected User Experiences and Telemetry
+
+# 원격 시스템 종료
+ - 원격 시스템 종료를 위한 인바운드 규칙(RPC-EP-In)
+ - 원격 시스템 종료를 위한 인바운드 규칙(TCP-In)
+
+# SNMP Trap
+ - SNMP 트랩 서비스(UDP In)
+ - SNMP 트랩 서비스(UDP In)
+
+# 가상 컴퓨터 모니터링
+ - 가상 컴퓨터 모니터링(RPC)
+ - 가상 컴퓨터 모니터링(NB-Session-In)
+ - 가상 컴퓨터 모니터링(에코 요청 - ICMPv6-In)
+ - 가상 컴퓨터 모니터링(에코 요청 - ICMPv4-In)
+ - 가상 컴퓨터 모니터링(DCOM-In)
