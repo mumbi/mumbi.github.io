@@ -1,26 +1,27 @@
-규칙 이름:                            원격 서비스 관리(RPC-EPMAP)
-그룹화:                               원격 서비스 관리
-규칙 이름:                            원격 서비스 관리(NP-In)
-그룹화:                               원격 서비스 관리
-규칙 이름:                            원격 서비스 관리(RPC)
-그룹화:                               원격 서비스 관리
-규칙 이름:                            mDNS(Udp-out)
-그룹화:                               mDNS
-규칙 이름:                            mDNS(Udp-in)
-그룹화:                               mDNS
-규칙 이름:                            핵심 네트워킹 - 그룹 정책(LSASS-Out)
-그룹화:                               핵심 네트워킹
-규칙 이름:                            핵심 네트워킹 - DNS(UDP-Out)
-그룹화:                               핵심 네트워킹
-규칙 이름:                            핵심 네트워킹 - 그룹 정책(TCP-Out)
-그룹화:                               핵심 네트워킹
-규칙 이름:                            핵심 네트워킹 - 그룹 정책(NP-Out)
-그룹화:                               핵심 네트워킹
-규칙 이름:                            핵심 네트워킹 - IPv6(IPv6-Out)
-그룹화:                               핵심 네트워킹
-규칙 이름:                            핵심 네트워킹 - IPv6(IPv6-In)
-그룹화:                               핵심 네트워킹
-규칙 이름:                            핵심 네트워킹 - IPHTTPS(TCP-Out)
+---
+layout: post
+title: 방화벽 규칙(firewall rule)
+categories: ops
+tags: [방화벽, 규칙, firewall, rule]
+---
+
+# 원격 서비스 관리
+ - 원격 서비스 관리(RPC-EPMAP)
+ - 원격 서비스 관리(NP-In)
+ - 원격 서비스 관리(RPC)
+
+# mDNS
+ - mDNS(Udp-out)
+ - mDNS(Udp-in)
+
+# 핵심 네트워킹
+ - 핵심 네트워킹 - 그룹 정책(LSASS-Out)
+ - 핵심 네트워킹 - DNS(UDP-Out)
+ - 핵심 네트워킹 - 그룹 정책(TCP-Out)
+ - 핵심 네트워킹 - 그룹 정책(NP-Out)
+ - 핵심 네트워킹 - IPv6(IPv6-Out)
+ - 핵심 네트워킹 - IPv6(IPv6-In)
+ - 핵심 네트워킹 - IPHTTPS(TCP-Out)
 그룹화:                               핵심 네트워킹
 규칙 이름:                            핵심 네트워킹 - IPHTTPS(TCP-In)
 그룹화:                               핵심 네트워킹
