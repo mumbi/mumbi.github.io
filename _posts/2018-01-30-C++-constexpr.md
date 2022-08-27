@@ -1,5 +1,4 @@
 ---
-layout: post
 title: C++ constexpr
 categories: dev
 tags: [c++, constexpr]

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: std::forward
 categories: dev
 tags: [c++, std, forward]

@@ -1,7 +1,7 @@
+# https://github.com/alastairhm/alpine-jekyll
 FROM ruby:alpine3.16
 
 WORKDIR /blog
-EXPOSE 80
 
 RUN apk add --update \
   build-base \

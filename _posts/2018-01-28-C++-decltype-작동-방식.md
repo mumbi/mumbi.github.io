@@ -1,5 +1,4 @@
 ---
-layout: post
 title: C++ decltype 작동 방식
 categories: dev
 tags: [c++, decltype, auto]
