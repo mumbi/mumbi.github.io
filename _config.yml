@@ -295,6 +295,8 @@ defaults:
       toc: true
       toc_sticky: true
       show_date: true
+      sidebar:
+        nav: "categories"
   # _pages
   - scope:
       path: ""

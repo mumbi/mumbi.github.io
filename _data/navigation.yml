@@ -16,3 +16,10 @@ main:
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
+
+categories:
+  - title: "dev"
+    children:
+      - title: "dev"
+        url: /categories/dev
+        category: "dev"
