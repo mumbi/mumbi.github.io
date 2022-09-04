@@ -1,8 +1,7 @@
 ---
-layout: post
 title: std::forward
-categories: dev
-tags: [c++, std, forward]
+categories: cpp
+tags: [cpp, std, forward]
 ---
 
 # std::forward

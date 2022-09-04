@@ -1,0 +1,36 @@
+# main links
+main:
+  - title: "categories"
+    url: /categories
+  - title: "tags"
+    url: /tags
+  - title: "archive"
+    url: /archive
+  # - title: "Quick-Start Guide"
+  #   url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
+  # - title: "About"
+  #   url: https://mmistakes.github.io/minimal-mistakes/about/
+  # - title: "Sample Posts"
+  #   url: /year-archive/
+  # - title: "Sample Collections"
+  #   url: /collection-archive/
+  # - title: "Sitemap"
+  #   url: /sitemap/
+
+categories:
+  - title: "development"
+    children:
+      - title: "c++"
+        url: /categories/cpp
+        category: "cpp"
+      - title: "c#"
+        url: /categories/csharp
+        category: "csharp"
+      - title: "bash"
+        url: /categories/bash
+        category: "bash"
+  - title: "operations"
+    children:
+      - title: "windows"
+        url: /categories/windows
+        category: "windows"

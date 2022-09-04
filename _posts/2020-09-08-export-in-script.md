@@ -1,8 +1,7 @@
 ---
-layout: post
 title: 스크립트로 환경 변수 설정하기
-categories: dev
-tags: sh
+categories: bash
+tags: bash
 ---
 
 ```sh

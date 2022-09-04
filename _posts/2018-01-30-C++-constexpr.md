@@ -1,8 +1,7 @@
 ---
-layout: post
 title: C++ constexpr
-categories: dev
-tags: [c++, constexpr]
+categories: cpp
+tags: [cpp, constexpr]
 ---
 
 # constexpr

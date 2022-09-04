@@ -1,8 +1,7 @@
 ---
-layout: post
 title: 원격 MMC(Microsoft Management Console) in WORKGROUP
-categories: ops
-tags: [원격, MMC, Microsoft Management Console, WORKGROUP]
+categories: windows
+tags: [windows, 원격, MMC, Microsoft Management Console, WORKGROUP]
 ---
 
 # MMC(Microsoft Management Console)

@@ -1,8 +1,7 @@
 ---
-layout: post
 title: C++ perfect forwarding 의 실패
-categories: dev
-tags: [c++, perfect forwarding, 중괄호 초기치, null, static const, constexpr, overloading, 비트필드]
+categories: cpp
+tags: [cpp, perfect forwarding, 중괄호 초기치, null, static const, constexpr, overloading, 비트필드]
 ---
 
 # perfect forwarding 의 실패
