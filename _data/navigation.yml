@@ -18,8 +18,19 @@ main:
   #   url: /sitemap/
 
 categories:
-  - title: "dev"
+  - title: "development"
     children:
-      - title: "dev"
-        url: /categories/dev
-        category: "dev"
+      - title: "c++"
+        url: /categories/cpp
+        category: "cpp"
+      - title: "c#"
+        url: /categories/csharp
+        category: "csharp"
+      - title: "bash"
+        url: /categories/bash
+        category: "bash"
+  - title: "operations"
+    children:
+      - title: "windows"
+        url: /categories/windows
+        category: "windows"

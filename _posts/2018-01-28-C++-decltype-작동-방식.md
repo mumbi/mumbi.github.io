@@ -1,7 +1,7 @@
 ---
 title: C++ decltype 작동 방식
-categories: dev
-tags: [c++, decltype, auto]
+categories: cpp
+tags: [cpp, decltype, auto]
 ---
 
 # decltype 작동 방식

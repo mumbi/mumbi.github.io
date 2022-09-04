@@ -19,7 +19,7 @@
           {% if child.category %}
           {% assign category = site.categories[child.category] | default: nil | where_exp: "item", "item.hidden != true" %}
           {% endif %}
-            <li><a href="{{ child.url | relative_url }}"{% if child.url == page.url %} class="active"{% endif %}>{{ child.title }} {% if category %}{{ category.size }}{% endif %}</a></li>
+            <li><a href="{{ child.url | relative_url }}"{% if child.url == page.url %} class="active"{% endif %}>{{ child.title }} {% if category %}({{ category.size }}){% endif %}</a></li>
           {% endfor %}
         </ul>
         {% endif %}
