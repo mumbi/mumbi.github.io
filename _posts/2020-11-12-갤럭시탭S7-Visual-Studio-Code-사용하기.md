@@ -119,9 +119,6 @@ vi 로 config.yaml 의 비밀버호를 변경하고 다시 code-server 를 실�
 code-server 의 장점 중 하나는 터미널 창(Ctrl + `) 에서 ubuntu 쉘을 사용할 수 있는 것입니다.
 
 # 마무리
-이 포스트를 작성하기 위해 몇가지 방법으로 시도해보았는데 code-server 의 install.sh 을 사용하지 않고 직접 release 중 arm 버전(대부분의 모바일 기기는 arm 아키텍처를 사용합니다.)을 설치하면 code-server 앱을 설치할 수 있었습니다. arm 아키텍처를 모바일에서 많이 사용하기 때문에 앱을 제공해주는 것 같기도 합니다.
-브라우저가 아닌 앱으로 실헹하기 때문에 Visual Studio Code 앱을 설치한 느낌을 받을 수 있었습니다. 
-
 이것으로 갤럭시 탭 S7 에서 Visual Studio Code 를 사용하는 방법을 포스팅을 마무리합니다.
 
 감사합니다.
