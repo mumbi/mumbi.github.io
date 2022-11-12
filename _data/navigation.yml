@@ -29,6 +29,9 @@ categories:
       - title: "bash"
         url: /categories/#bash
         category: "bash"
+      - title: "tips"
+        url: /categories/#dev-tips
+        category: "dev-tips"
   - title: "operations"
     children:
       - title: "windows"
