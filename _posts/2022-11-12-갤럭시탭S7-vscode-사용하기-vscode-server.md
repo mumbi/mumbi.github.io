@@ -1,13 +1,15 @@
 ---
-title: 갤럭시 탭 S7(안드로이드 태블릿) 에서 Visual Studio Code 사용하기 (feat. vscode.dev)
+title: 갤럭시 탭 S7(안드로이드 태블릿) 에서 Visual Studio Code 사용하기 (feat. vscode-server, vscode.dev)
 categories: dev-tips
-tags: ['갤럭시 탭 S7', '안드로이드', 'vscode']
+tags: ['갤럭시 탭 S7', '안드로이드', 'vscode', 'vscode-server']
 ---
 
 # 개요
+
 `Microsoft` 에서 제공하는 `vscode-server` 를 사용해서 `vscode` 를 사용하는 방법을 설명합니다. 
 
 # `vscode-server` 설치
+
 `vscode-server` 는 리눅스, 맥, 윈도우즈 환경을 지원합니다.
 
 <https://code.visualstudio.com/docs/remote/vscode-server#_quick-start>{:target="_blank"}
@@ -47,7 +49,7 @@ Report issues at https://termux.com/issues
 
 `Termux` 앱이 리눅스 쉘 기능을 제공하지만 리눅스 배포판과는 구조가 다르기 때문에 리눅스 배포판을 설치하여 진행합니다.
 
-### proot-distro 설치
+### `proot-distro` 설치
 
 패키지들을 최신으로 업그레이드 합니다.
 
@@ -73,7 +75,7 @@ proot-distro install ubuntu
 proot-distro login ubuntu
 ```
 
-#### vscode-server 설치
+#### `vscode-server` 설치
 
 `visual studio` 에서 제공하는 스크립트로 설치를 진행합니다.
 
