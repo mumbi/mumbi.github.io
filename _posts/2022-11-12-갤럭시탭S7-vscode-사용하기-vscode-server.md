@@ -1,5 +1,5 @@
 ---
-title: 갤럭시 탭 S7(안드로이드 태블릿) 에서 Visual Studio Code 사용하기 (feat. vscode-server, vscode.dev)
+title: 갤럭시 탭 S7(안드로이드 태블릿) 에서 vscode 사용하기 (feat. vscode-server, vscode.dev)
 categories: dev-tips
 tags: ['갤럭시 탭 S7', '안드로이드', 'vscode', 'vscode-server']
 ---
