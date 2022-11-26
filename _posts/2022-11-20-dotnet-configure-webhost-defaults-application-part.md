@@ -1,7 +1,7 @@
 ---
 title: .NET IHostBuilder.ConfigureWebHostDefaults() 와 ApplicationPart
-categories: c#
-tags: ["C#", "WebHost", "ApplicationPart", "ApplicationName"]
+categories: csharp
+tags: ["csharp", "WebHost", "ApplicationPart", "ApplicationName"]
 ---
 
 # 개요
