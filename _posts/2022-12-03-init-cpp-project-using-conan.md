@@ -27,7 +27,7 @@ tags: ["cpp", "conan", "cmake", "clang", "linux"]
 `python` 으로 개발되어서 `pip3` 로 설치할 수 있습니다.
 
 ```bash
-sudo yum install python3=pip
+sudo yum install python3-pip
 sudo pip3 install conan
 ```
 
