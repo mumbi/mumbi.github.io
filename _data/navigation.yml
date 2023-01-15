@@ -37,3 +37,8 @@ categories:
       - title: "windows"
         url: /categories/#windows
         category: "windows"
+  - title: "blog"
+    children:
+      - title: "jekyll"
+        url: /categories/#jekyll
+        category: "jekyll"
