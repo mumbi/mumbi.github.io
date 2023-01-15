@@ -54,6 +54,19 @@ sudo yum install clang
 `C/C++ Extension Pack`
 `CMake`
 
+# 소스 코드 작성
+
+소스 코드를 `src/` 에 생성합니다.
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    std::cout << "hello world!" << std::endl;
+}
+```
+
 # `conan` 빌드
 
 ## `conanfile.txt` 파일 생성
@@ -65,17 +78,17 @@ sudo yum install clang
 cmake
 ```
 
-## build
+## install
 
-`conanfile.txt` 가 준비되면 `build` 디렉토리를 생성하고 이동하여 `conan` 을 빌드 합니다.
+`conanfile.txt` 가 준비되면 `build` 디렉토리를 생성하고 이동하여 `conan` 으로 종속성들을 설치합니다.
 
 ```bash
 mkdir build
 cd build
-conan build ..
+conan install ..
 ```
 
-`conan build` 를 실행하면 `conanfile.txt` 에 명시된 종속성들이 설치되고, `generators` 와 연동하기 위한 파일들이 생성됩니다.
+`conan install` 를 실행하면 `conanfile.txt` 에 명시된 종속성들이 설치되고, `generators` 와 연동하기 위한 파일들이 생성됩니다.
 
 # `CMake` 구성
 
@@ -111,19 +124,6 @@ target_link_libraries(main ${CONAN_LIBS})
 ```bash
 cd build
 cmake ..
-```
-
-# 소스 코드 작성
-
-소스 코드를 루트 디렉토리의 `src/` 에 생성합니다.
-
-```cpp
-#include <iostream>
-
-int main()
-{
-    std::cout << "hello world!" << std::endl;    
-}
 ```
 
 여기까지 진행하면 아래와 같은 디렉토리 구조가 생성됩니다.
