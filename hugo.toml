@@ -1,0 +1,82 @@
+baseURL = "https://mumbi.net/"
+languageCode = "ko-KR"
+defaultContentLanguage = "ko"
+title = "mumbi library"
+theme = "PaperMod"
+[pagination]
+  pagerSize = 5
+
+[params]
+  env = "production"
+  description = "Memories volatilize."
+  author = "mumbi"
+  defaultTheme = "dark"
+  disableThemeToggle = true
+  ShowReadingTime = true
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = false
+  ShowCodeCopyButtons = true
+  ShowToc = true
+  TocOpen = true
+  comments = true
+
+  [params.homeInfoParams]
+    Title = "mumbi library"
+    Content = "Memories volatilize."
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/mumbi"
+
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
+
+[services.disqus]
+  shortname = "mumbi-github-io"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.goldmark.extensions]
+  footnote = true
+  strikethrough = true
+  table = true
+  taskList = true
+
+[markup.tableOfContents]
+  startLevel = 1
+  endLevel = 6
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[[menu.main]]
+  name = "Categories"
+  url = "/categories/"
+  weight = 10
+
+[[menu.main]]
+  name = "Tags"
+  url = "/tags/"
+  weight = 20
+
+[[menu.main]]
+  name = "Archive"
+  url = "/archives/"
+  weight = 30
+
+[[menu.main]]
+  name = "Search"
+  url = "/search/"
+  weight = 40
