@@ -1,0 +1,50 @@
+name: 작업 요청
+description: 작업을 요청합니다
+title: "[작업] "
+labels: ["task"]
+body:
+  - type: dropdown
+    id: task-type
+    attributes:
+      label: 작업 유형
+      options:
+        - 기능 추가
+        - 버그 수정
+        - 개선
+        - 문서 작성
+        - 기타
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 작업 설명
+      description: 구체적인 작업 내용을 작성해주세요
+      placeholder: |
+        예: 검색 기능을 개선한다.
+        - 목적: 사용자 경험 향상
+        - 범위: 검색 결과 페이지 UI 변경
+    validations:
+      required: true
+
+  - type: textarea
+    id: done-criteria
+    attributes:
+      label: 완료 조건
+      description: 작업이 완료되었다고 판단할 기준
+      placeholder: |
+        - [ ] 구현 완료
+        - [ ] 테스트 통과
+        - [ ] 배포 완료
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: 참고 자료
+      description: 관련 링크, 메모, 리서치 결과 등
+      placeholder: 관련 URL이나 메모를 입력하세요
+    validations:
+      required: false
