@@ -10,13 +10,8 @@
 
 [[main]]
   name = "아카이브"
-  pageRef = "archives"
+  pageRef = "posts"
   weight = 30
-
-[[main]]
-  name = "검색"
-  pageRef = "search"
-  weight = 40
 
 [[main]]
   identifier = "github"

@@ -1,12 +1,13 @@
 colorScheme = "noir"
 defaultAppearance = "dark"
-autoSwitchAppearance = false
+autoSwitchAppearance = true
 
 enableSearch = true
 enableCodeCopy = true
 enableStructuredBreadcrumbs = true
 
 mainSections = ["posts"]
+defaultBackgroundImage = "img/background.svg"
 
 smartTOC = true
 
@@ -17,14 +18,16 @@ smartTOC = true
   showMenu = true
   showCopyright = true
   showThemeAttribution = false
-  showAppearanceSwitcher = false
+  showAppearanceSwitcher = true
   showScrollToTop = true
 
 [homepage]
-  layout = "profile"
+  layout = "background"
+  homepageImage = "img/background.svg"
   showRecent = true
   showRecentItems = 10
   cardView = true
+  layoutBackgroundBlur = true
 
 [article]
   showDate = true
@@ -38,17 +41,32 @@ smartTOC = true
   showPagination = true
   showEdit = false
   showWordCount = false
-  showHero = false
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundHeaderSpace = false
   showZenMode = false
 
 [list]
   showCards = true
   cardView = true
   groupByYear = true
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundHeaderSpace = false
 
 [taxonomy]
   showTermCount = true
-  cardView = false
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundHeaderSpace = false
+  cardView = true
+
+[term]
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundHeaderSpace = false
+  cardView = true
+  groupByYear = true
 
 [advertisement]
   # adsense = ""
