@@ -19,7 +19,8 @@ package-lock.json
 codekit-config.json
 
 # Claude Code
-.claude/
+.claude/worktrees/
+.claude/settings.local.json
 
 # macOS
 .DS_Store
