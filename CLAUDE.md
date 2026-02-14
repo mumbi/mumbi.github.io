@@ -112,6 +112,23 @@ toc: true
 - `/project:new-post "주제"` — 새 포스트 생성
 - `/project:seo-audit` — SEO 점검
 - `/project:publish` — 게시 및 배포
+- `/project:monetize-audit` — 수익화 상태 점검
+- `/project:add-affiliate "파일경로"` — 기존 글에 제휴 링크 추가
+- `/project:revenue-report` — 월간 수익 현황 리포트
+
+## 수익화 운영 지침
+
+상세 실행 매뉴얼: `monetization-guide.md` 참조
+
+### 핵심 규칙
+
+- **애드센스 퍼블리셔 ID**: `ca-pub-9882237042146290`
+- **광고 컴포넌트 4종**: ad-article-top, ad-article-bottom, ad-infeed, ad-sidebar
+- **제휴 링크 데이터**: 데이터 파일로 중앙 관리, 플레이스홀더 URL 임의 생성 금지
+- **제휴 컴포넌트 3종**: affiliate-cloud-cta, affiliate-tools-recommend, affiliate-learn-more
+- **초기 단계**: 광고 상단 1 + 하단 1, 제휴 링크 글당 최대 2개
+- **환경 체크**: 모든 광고 코드는 프로덕션 환경 조건문으로 감싼다
+- **SEO 보호**: 제휴 링크에 `rel="noopener sponsored"` 필수
 
 ## Hugo 마이그레이션 검토
 
