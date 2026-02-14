@@ -18,6 +18,9 @@ npm-debug.log*
 package-lock.json
 codekit-config.json
 
+# Claude Code
+.claude/
+
 # macOS
 .DS_Store
 
