@@ -1,0 +1,22 @@
+theme = "blowfish"
+baseURL = "https://mumbi.net/"
+defaultContentLanguage = "ko"
+enableRobotsTXT = true
+hasCJKLanguage = true
+
+[pagination]
+  pagerSize = 5
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[services.disqus]
+  shortname = "mumbi-github-io"

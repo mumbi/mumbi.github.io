@@ -1,0 +1,54 @@
+colorScheme = "noir"
+defaultAppearance = "dark"
+autoSwitchAppearance = false
+
+enableSearch = true
+enableCodeCopy = true
+enableStructuredBreadcrumbs = true
+
+mainSections = ["posts"]
+
+smartTOC = true
+
+[header]
+  layout = "fixed"
+
+[footer]
+  showMenu = true
+  showCopyright = true
+  showThemeAttribution = false
+  showAppearanceSwitcher = false
+  showScrollToTop = true
+
+[homepage]
+  layout = "profile"
+  showRecent = true
+  showRecentItems = 10
+  cardView = true
+
+[article]
+  showDate = true
+  showAuthor = true
+  showReadingTime = true
+  showTableOfContents = true
+  showRelatedContent = true
+  relatedContentLimit = 3
+  showTaxonomies = true
+  showBreadcrumbs = true
+  showPagination = true
+  showEdit = false
+  showWordCount = false
+  showHero = false
+  showZenMode = false
+
+[list]
+  showCards = true
+  cardView = true
+  groupByYear = true
+
+[taxonomy]
+  showTermCount = true
+  cardView = false
+
+[advertisement]
+  # adsense = ""
