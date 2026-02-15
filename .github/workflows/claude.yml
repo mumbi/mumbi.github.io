@@ -1,0 +1,10 @@
+name: Claude Code (deprecated)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This workflow is deprecated."
