@@ -1,0 +1,81 @@
+name: Claude Worker
+
+on:
+  issues:
+    types: [opened, assigned]
+  issue_comment:
+    types: [created]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  worker:
+    if: |
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude'))) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && github.event.review.state == 'changes_requested')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          submodules: recursive
+
+      - name: Checkout Claude config
+        uses: actions/checkout@v4
+        with:
+          repository: mumbi/claude-config-lead-kor
+          path: .claude-config
+          token: ${{ secrets.CLAUDE_CONFIG_TOKEN }}
+
+      - name: Setup Claude config
+        run: |
+          mkdir -p ~/.claude
+          cp -r .claude-config/* ~/.claude/
+          rm -rf .claude-config
+
+      - name: Setup git identity
+        run: |
+          git config user.name "claude-worker"
+          git config user.email "claude-worker@noreply.github.com"
+
+      - name: Run Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          model: "claude-sonnet-4-5-20250929"
+          custom_instructions: |
+            ## 이슈 작업 (issues / issue_comment 이벤트)
+
+            리드 에이전트로서 작업을 분해하고 subagent에게 병렬 위임한다.
+
+            ### 1단계: 분석 및 브랜치 생성
+            - 이슈 내용을 파악한다
+            - feature 또는 fix 브랜치를 생성한다 (feature/<설명> 또는 fix/<설명>)
+            - git push -u origin <브랜치> 로 리모트에 브랜치를 생성한다
+
+            ### 2단계: 커밋 단위 task 분해 및 병렬 위임
+            - 작업을 커밋 단위의 독립적인 task로 분해한다
+            - 각 task는 가능한 한 서로 다른 파일을 수정하도록 분배한다
+            - Task 도구로 subagent를 병렬 생성하여 위임한다
+            - 각 subagent에게 전달할 프롬프트에 다음을 포함한다:
+              - 수행할 작업 내용
+              - 수정 대상 파일 목록
+              - 커밋 메시지
+              - "작업 완료 후 git add <파일들> && git commit 실행. 충돌 발생 시 git pull --rebase origin <브랜치> 후 재시도 (최대 3회)"
+
+            ### 3단계: 검증 및 PR 생성
+            - 모든 subagent 완료 후 git log로 커밋 이력을 확인한다
+            - git push origin <브랜치> 로 푸시한다
+            - PR을 생성한다 (base: master)
+
+            ## 리뷰 피드백 반영 (pull_request_review 이벤트)
+            1. changes_requested 리뷰 내용을 확인한다
+            2. 수정이 필요한 항목을 task로 분해하여 subagent에게 병렬 위임한다
+            3. 모든 수정 완료 후 푸시한다
