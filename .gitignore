@@ -28,6 +28,10 @@ codekit-config.json
 # macOS
 .DS_Store
 
+# Hugo
+dist/
+.hugo_build.lock
+
 # Jekyll generated files
 .jekyll-cache
 .jekyll-metadata
