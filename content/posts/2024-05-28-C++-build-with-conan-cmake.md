@@ -29,7 +29,7 @@ draft: false
 여러 언어들은 이런 종속성 관리를 위해 패키지 관리 시스템을 제공합니다.
 
 |언어|패키지 관리 시스템|
-|:-:|:-:|:-:|
+|:-:|:-:|
 |java|maven, gradle|
 |c#|nuget|
 |javascript|npm, yarn|
