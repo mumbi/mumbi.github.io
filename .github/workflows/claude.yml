@@ -35,4 +35,6 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           model: "claude-sonnet-4-5-20250929"
-          custom_instructions: "모든 응답과 리뷰는 반드시 한국어로 작성할 것."
+          custom_instructions: |
+            모든 응답과 리뷰는 반드시 한국어로 작성할 것.
+            PR 리뷰 시 전체 요약은 PR 코멘트로, 구체적인 지적사항은 해당 파일/라인에 인라인 리뷰 코멘트로 남길 것.
