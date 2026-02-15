@@ -35,3 +35,4 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           model: "claude-sonnet-4-5-20250929"
+          custom_instructions: "모든 응답과 리뷰는 반드시 한국어로 작성할 것."
