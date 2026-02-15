@@ -70,10 +70,13 @@ toc: true
 | 검수 (SEO·품질) | Claude Code + Projects | Code의 `/seo-audit`로 기술적 SEO 점검, Projects에서 스타일 가이드 대비 품질 리뷰 |
 | 배포 | Claude Code | `git add/commit/push` 자동 실행, 자동 빌드 트리거 |
 
-### GitHub Issues 작업 관리
+### GitHub Projects 작업 관리
 
-- `/github-check-tasks [owner/repo]` — 열린 작업 요청 목록 조회
-- `/github-start-task <이슈번호|owner/repo#번호>` — 작업 시작 및 이슈 관리
+`mumbi.net` 프로젝트(#2)에서 칸반(Todo → In Progress → Done)으로 작업을 관리한다.
+
+- `/github-add-task` — 이슈 생성 및 프로젝트에 Todo로 등록
+- `/github-check-tasks` — 프로젝트에서 대기 중인(Todo) 작업 목록 조회
+- `/github-start-task <이슈번호|owner/repo#번호>` — 작업 시작(In Progress) 및 완료(Done) 시 프로젝트 상태 자동 업데이트
 
 ## 수익화 운영 지침
 
