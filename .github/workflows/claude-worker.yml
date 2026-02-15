@@ -49,8 +49,8 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          model: "claude-sonnet-4-5-20250929"
-          custom_instructions: |
+          claude_args: "--model claude-sonnet-4-5-20250929"
+          prompt: |
             ## 이슈 작업 (issues / issue_comment 이벤트)
 
             리드 에이전트로서 작업을 분해하고 subagent에게 병렬 위임한다.
