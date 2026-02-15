@@ -1,10 +1,18 @@
 name: Claude Code (deprecated)
 
 on:
-  workflow_dispatch:
+  issue_comment:
+    types: [created]
+  issues:
+    types: [opened, assigned]
+  pull_request_review:
+    types: [submitted]
+  pull_request_review_comment:
+    types: [created]
 
 jobs:
-  noop:
+  skip:
+    if: false
     runs-on: ubuntu-latest
     steps:
-      - run: echo "This workflow is deprecated."
+      - run: echo "deprecated"
