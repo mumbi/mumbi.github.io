@@ -50,6 +50,14 @@ jobs:
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
 
+      - name: Generate build info
+        run: |
+          echo '{
+            "commit": "${{ github.sha }}",
+            "ref": "${{ github.ref_name }}",
+            "date": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+          }' > ./dist/build-info.json
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
