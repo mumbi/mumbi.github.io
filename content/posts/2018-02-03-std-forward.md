@@ -4,6 +4,8 @@ date: 2018-02-03T00:00:00+09:00
 categories: ["cpp"]
 tags: [cpp, std, forward]
 url: "/cpp/std-forward/"
+description: "C++ std::forward의 동작 원리를 설명합니다. rvalue로 캐스팅하는 조건, 참조 축약을 통한 lvalue/rvalue 구분, perfect forwarding 구현 방식을 다룹니다."
+author: "mumbi"
 draft: false
 ---
 

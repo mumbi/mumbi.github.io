@@ -4,6 +4,8 @@ date: 2022-11-26T00:00:00+09:00
 categories: ["dev-tips"]
 tags: ["vscode-server", "키바인딩"]
 url: "/dev-tips/vscode-server-keybindings/"
+description: "vscode-server에서 작동하지 않는 복사, 잘라내기, 붙여넣기 단축키를 keybindings.json으로 설정하는 방법을 설명합니다. 브라우저 클립보드 접근 문제 해결법을 다룹니다."
+author: "mumbi"
 draft: false
 ---
 

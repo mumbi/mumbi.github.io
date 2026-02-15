@@ -4,6 +4,8 @@ date: 2024-06-16T00:00:00+09:00
 categories: ["cpp"]
 tags: ["cpp", "conan", "cmake", "cmake_lib"]
 url: "/cpp/C++-conan-cmake_lib/"
+description: "Conan의 cmake_lib 템플릿으로 C++ 라이브러리 프로젝트를 생성하는 방법을 설명합니다. transitive_headers 설정, 패키지 배포, 의존성 관리 등 실무 예제를 제공합니다."
+author: "mumbi"
 draft: false
 ---
 

@@ -4,6 +4,8 @@ date: 2023-01-15T00:00:00+09:00
 categories: ["jekyll"]
 tags: ["alpine", "jekyll", "sass-embedded"]
 url: "/jekyll/fix-jekyll-build-error-in-alpine-linux/"
+description: "Alpine Linux에서 Jekyll 빌드 시 sass-embedded 호환성 오류를 해결하는 방법을 설명합니다. jekyll-sass-converter 버전 다운그레이드를 통한 문제 해결법을 다룹니다."
+author: "mumbi"
 draft: false
 ---
 

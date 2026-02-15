@@ -4,6 +4,8 @@ date: 2018-01-30T00:00:00+09:00
 categories: ["cpp"]
 tags: [cpp, constexpr]
 url: "/cpp/C++-constexpr/"
+description: "C++ constexpr 키워드의 개념과 활용법을 설명합니다. 컴파일 타임 상수, constexpr 함수 제약 조건, 리터럴 타입, 사용자 정의 타입의 constexpr 활용을 다룹니다."
+author: "mumbi"
 draft: false
 ---
 

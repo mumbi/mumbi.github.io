@@ -4,6 +4,8 @@ date: 2022-12-03T00:00:00+09:00
 categories: ["cpp"]
 tags: ["cpp", "conan", "cmake", "clang", "linux"]
 url: "/cpp/init-cpp-project-using-conan/"
+description: "Linux 환경에서 VS Code, Conan, CMake를 활용한 C++ 프로젝트 구성 방법을 설명합니다. 개발 환경 설정부터 빌드, 실행까지 단계별로 안내합니다."
+author: "mumbi"
 draft: false
 ---
 

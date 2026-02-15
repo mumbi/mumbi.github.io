@@ -4,6 +4,8 @@ date: 2017-01-02T00:00:00+09:00
 categories: ["csharp"]
 tags: [baidu, push, csharp]
 url: "/csharp/baidu-push-csharp/"
+description: "C#으로 Baidu Push Server API를 구현하는 방법. PHP의 urlencode 호환 처리, 타임스탬프 생성, MD5 해싱을 통한 인증 구현 예제를 제공합니다."
+author: "mumbi"
 draft: false
 ---
 # reference

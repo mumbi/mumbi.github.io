@@ -4,6 +4,8 @@ date: 2022-11-20T00:00:00+09:00
 categories: ["csharp"]
 tags: ["csharp", "WebHost", "ApplicationPart", "ApplicationName"]
 url: "/csharp/dotnet-configure-webhost-defaults-application-part/"
+description: ".NET ConfigureWebHostDefaults를 라이브러리로 분리할 때 주의할 점을 설명합니다. AddApplicationPart, ApplicationName 설정을 통한 컨트롤러 인식 문제 해결 방법을 다룹니다."
+author: "mumbi"
 draft: false
 ---
 

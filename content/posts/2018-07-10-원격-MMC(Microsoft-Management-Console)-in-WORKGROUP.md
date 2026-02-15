@@ -4,6 +4,8 @@ date: 2018-07-10T00:00:00+09:00
 categories: ["windows"]
 tags: [windows, 원격, MMC, Microsoft Management Console, WORKGROUP]
 url: "/windows/원격-MMC(Microsoft-Management-Console)-in-WORKGROUP/"
+description: "WORKGROUP 환경에서 원격 MMC를 설정하는 방법을 설명합니다. 계정 동기화, 방화벽 규칙 설정, 네트워크 검색 및 디스크 관리 설정 방법을 다룹니다."
+author: "mumbi"
 draft: false
 ---
 

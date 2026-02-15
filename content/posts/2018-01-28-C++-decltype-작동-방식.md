@@ -4,6 +4,8 @@ date: 2018-01-28T00:00:00+09:00
 categories: ["cpp"]
 tags: [cpp, decltype, auto]
 url: "/cpp/C++-decltype-작동-방식/"
+description: "C++ decltype의 정확한 타입 추론 방식과 decltype(auto) 사용법을 설명합니다. 이름과 표현식에 따른 타입 추론 차이와 참조 반환의 위험성을 다룹니다."
+author: "mumbi"
 draft: false
 ---
 

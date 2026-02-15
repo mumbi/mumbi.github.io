@@ -4,6 +4,8 @@ date: 2022-11-12T00:00:00+09:00
 categories: ["dev-tips"]
 tags: ['갤럭시 탭 S7', '안드로이드', 'vscode', 'vscode-server']
 url: "/dev-tips/갤럭시탭S7-vscode-사용하기-vscode-server/"
+description: "안드로이드 태블릿에서 Microsoft vscode-server로 VS Code를 사용하는 방법을 설명합니다. GitHub Remote Tunnel, vscode.dev 연동을 통한 완전한 VS Code 경험을 제공합니다."
+author: "mumbi"
 draft: false
 ---
 

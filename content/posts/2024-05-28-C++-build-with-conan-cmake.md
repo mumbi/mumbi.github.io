@@ -4,6 +4,8 @@ date: 2024-05-28T00:00:00+09:00
 categories: ["cpp"]
 tags: ["cpp", "빌드", "conan", "cmake"]
 url: "/cpp/C++-build-with-conan-cmake/"
+description: "VS Code에서 Conan과 CMake로 C++ 빌드 시스템을 구성하는 전체 가이드입니다. 프로젝트 생성, 의존성 관리, 빌드, 디버깅까지 실습 예제와 함께 설명합니다."
+author: "mumbi"
 draft: false
 ---
 

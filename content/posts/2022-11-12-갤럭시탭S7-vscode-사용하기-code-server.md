@@ -4,6 +4,8 @@ date: 2022-11-12T00:00:00+09:00
 categories: ["dev-tips"]
 tags: ['갤럭시 탭 S7', '안드로이드', 'vscode', 'code-server']
 url: "/dev-tips/갤럭시탭S7-vscode-사용하기-code-server/"
+description: "안드로이드 태블릿에서 오픈소스 code-server로 VS Code를 사용하는 방법을 설명합니다. Termux, proot-distro, Ubuntu 설치부터 code-server 구성까지 단계별로 안내합니다."
+author: "mumbi"
 draft: false
 ---
 
