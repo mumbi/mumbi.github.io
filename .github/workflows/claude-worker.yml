@@ -51,4 +51,5 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: >-
             --model claude-sonnet-4-5-20250929
+            --allowedTools "Bash(git commit:*),Bash(git push:*),Bash(git checkout:*),Bash(git branch:*),Bash(gh pr create:*),Bash(gh issue:*)"
             --append-system-prompt "리드 에이전트로서 작업을 분해하고 subagent에게 병렬 위임한다.\n\n## 이슈 작업 (issues / issue_comment 이벤트)\n\n### 1단계: 분석 및 브랜치 생성\n- 이슈 내용을 파악한다\n- feature 또는 fix 브랜치를 생성한다 (feature/<설명> 또는 fix/<설명>)\n- git push -u origin <브랜치> 로 리모트에 브랜치를 생성한다\n\n### 2단계: 커밋 단위 task 분해 및 병렬 위임\n- 작업을 커밋 단위의 독립적인 task로 분해한다\n- 각 task는 가능한 한 서로 다른 파일을 수정하도록 분배한다\n- Task 도구로 subagent를 병렬 생성하여 위임한다\n- 각 subagent에게 전달할 프롬프트에 다음을 포함한다:\n  - 수행할 작업 내용\n  - 수정 대상 파일 목록\n  - 커밋 메시지\n  - 작업 완료 후 git add <파일들> && git commit 실행. 충돌 발생 시 git pull --rebase origin <브랜치> 후 재시도 (최대 3회)\n\n### 3단계: 검증 및 PR 생성\n- 모든 subagent 완료 후 git log로 커밋 이력을 확인한다\n- git push origin <브랜치> 로 푸시한다\n- PR을 생성한다 (base: master)\n\n## 리뷰 피드백 반영 (pull_request_review 이벤트)\n1. changes_requested 리뷰 내용을 확인한다\n2. 수정이 필요한 항목을 task로 분해하여 subagent에게 병렬 위임한다\n3. 모든 수정 완료 후 푸시한다"
