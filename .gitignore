@@ -22,6 +22,9 @@ codekit-config.json
 .claude/worktrees/
 .claude/settings.local.json
 
+# Test worktree
+.test/
+
 # macOS
 .DS_Store
 
