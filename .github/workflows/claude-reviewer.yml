@@ -47,6 +47,7 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           trigger_phrase: ""
+          label_trigger: ""
           claude_args: >-
             --model claude-sonnet-4-5-20250929
             --append-system-prompt "PR을 리뷰한다. 전체 요약은 PR 코멘트로, 구체적인 지적사항은 해당 파일/라인에 인라인 리뷰 코멘트로 남긴다. 문제가 없으면 approve, 수정이 필요하면 request changes로 리뷰를 제출한다."
