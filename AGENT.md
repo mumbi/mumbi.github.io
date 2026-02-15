@@ -82,6 +82,39 @@ toc: true
 - `/github-check-tasks` — 대기 중인(Todo) 작업 목록 조회
 - `/github-start-task <이슈번호|owner/repo#번호>` — 작업 시작 및 완료 처리
 
+## 자동화 파이프라인 (CI 에이전트 지침)
+
+### 작업 에이전트 (claude-worker)
+
+리드 에이전트로서 작업을 분해하고 subagent에게 병렬 위임한다.
+
+**1단계: 분석 및 브랜치 생성**
+- 이슈 내용을 파악한다
+- feature 또는 fix 브랜치를 생성한다 (feature/<설명> 또는 fix/<설명>)
+- `git push -u origin <브랜치>`로 리모트에 브랜치를 생성한다
+
+**2단계: 커밋 단위 task 분해 및 병렬 위임**
+- 작업을 커밋 단위의 독립적인 task로 분해한다
+- 각 task는 가능한 한 서로 다른 파일을 수정하도록 분배한다
+- Task 도구로 subagent를 병렬 생성하여 위임한다
+- 각 subagent 프롬프트에 포함할 것: 작업 내용, 수정 대상 파일, 커밋 메시지
+- 커밋 충돌 시 `git pull --rebase origin <브랜치>` 후 재시도 (최대 3회)
+
+**3단계: 검증 및 PR 생성**
+- 모든 subagent 완료 후 `git log`로 커밋 이력을 확인한다
+- `git push origin <브랜치>`로 푸시한다
+- `gh pr create --base master --head <브랜치> --title <제목> --body <본문>` 명령을 직접 실행하여 PR을 생성한다
+- PR 본문 끝에 반드시 `@claude`를 포함한다 (리뷰 에이전트 트리거용)
+
+**리뷰 피드백 반영 (pull_request_review changes_requested)**
+1. 리뷰 피드백을 확인한다
+2. 수정이 필요한 항목을 task로 분해하여 subagent에게 병렬 위임한다
+3. 모든 수정 완료 후 푸시한다
+
+### 리뷰 에이전트 (claude-reviewer)
+
+PR을 리뷰한다. 전체 요약은 PR 코멘트로, 구체적인 지적사항은 해당 파일/라인에 인라인 리뷰 코멘트로 남긴다. 문제가 없으면 approve, 수정이 필요하면 request changes로 리뷰를 제출한다.
+
 ## 수익화 운영 지침
 
 상세 실행 매뉴얼: `monetization-guide.md` 참조
