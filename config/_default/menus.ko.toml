@@ -1,0 +1,20 @@
+[[main]]
+  name = "카테고리"
+  pageRef = "categories"
+  weight = 10
+
+[[main]]
+  name = "태그"
+  pageRef = "tags"
+  weight = 20
+
+[[main]]
+  name = "아카이브"
+  pageRef = "posts"
+  weight = 30
+
+[[main]]
+  identifier = "github"
+  pre = "github"
+  url = "https://github.com/mumbi"
+  weight = 100

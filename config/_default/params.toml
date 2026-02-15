@@ -1,0 +1,72 @@
+colorScheme = "noir"
+defaultAppearance = "dark"
+autoSwitchAppearance = true
+
+enableSearch = true
+enableCodeCopy = true
+enableStructuredBreadcrumbs = true
+
+mainSections = ["posts"]
+defaultBackgroundImage = "img/background.svg"
+
+smartTOC = true
+
+[header]
+  layout = "fixed"
+
+[footer]
+  showMenu = true
+  showCopyright = true
+  showThemeAttribution = false
+  showAppearanceSwitcher = true
+  showScrollToTop = true
+
+[homepage]
+  layout = "background"
+  homepageImage = "img/background.svg"
+  showRecent = true
+  showRecentItems = 10
+  cardView = true
+  layoutBackgroundBlur = true
+
+[article]
+  showDate = true
+  showAuthor = true
+  showReadingTime = true
+  showTableOfContents = true
+  showRelatedContent = true
+  relatedContentLimit = 3
+  showTaxonomies = true
+  showBreadcrumbs = true
+  showPagination = true
+  showEdit = false
+  showWordCount = false
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundHeaderSpace = false
+  showZenMode = false
+
+[list]
+  showCards = true
+  cardView = true
+  groupByYear = true
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundHeaderSpace = false
+
+[taxonomy]
+  showTermCount = true
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundHeaderSpace = false
+  cardView = true
+
+[term]
+  showHero = true
+  heroStyle = "background"
+  layoutBackgroundHeaderSpace = false
+  cardView = true
+  groupByYear = true
+
+[advertisement]
+  # adsense = ""

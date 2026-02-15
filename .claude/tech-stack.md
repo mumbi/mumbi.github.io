@@ -2,70 +2,66 @@
 
 ## 프레임워크 & 생성기
 
-- **생성기**: Jekyll (Ruby)
-- **테마**: Minimal Mistakes v4.24.0 (다크 모드)
+- **생성기**: Hugo (Extended, v0.146.0+)
+- **테마**: Blowfish (noir 컬러 스킴, git submodule)
 
 ## 배포 & 호스팅
 
 - **호스팅**: GitHub Pages + 커스텀 도메인 (mumbi.net)
+- **CI/CD**: GitHub Actions (`.github/workflows/hugo.yml`)
 
 ## 기능 & 통합
 
 - **댓글**: Disqus
-- **검색**: Lunr.js
+- **검색**: Blowfish 내장 검색 (JSON 인덱스)
+- **다크/라이트 모드**: 전환 버튼 지원
 
 ## 포스트 파일 규칙
 
-- **위치**: `_posts/` 디렉토리
-- **파일명**: `YYYY-MM-DD-title.md` (Jekyll 규칙)
-- **Permalink 형식**: `/:categories/:title/`
-- **카테고리 정의**: `_data/navigation.yml`
+- **위치**: `content/posts/` 디렉토리
+- **파일명**: `YYYY-MM-DD-title.md`
+- **Permalink 형식**: 프론트매터 `url` 필드로 지정
+- **섹션 인덱스**: `content/posts/_index.md`
 
 ## 프로젝트 디렉토리
 
 ```
-_config.yml        # 메인 설정
-_posts/            # 블로그 포스트 (마크다운)
-_pages/            # 정적 페이지 (아카이브, 태그, 카테고리)
-_layouts/          # HTML/Liquid 페이지 템플릿
-_includes/         # 재사용 가능한 템플릿 조각
-_sass/             # SCSS 스타일시트
-_data/             # 네비게이션 및 UI 텍스트 (YAML)
-assets/            # CSS, JS, 이미지
+config/_default/        # Hugo 분할 설정
+  hugo.toml             # 사이트 기본 설정
+  params.toml           # Blowfish 테마 파라미터
+  languages.ko.toml     # 한국어 언어 설정
+  menus.ko.toml         # 메뉴 구성
+  markup.toml           # 마크다운 렌더링 설정
+content/                # 콘텐츠
+  posts/                # 블로그 포스트
+  archives/             # 아카이브 페이지
+  search/               # 검색 페이지
+assets/                 # Hugo 파이프라인 자산 (이미지, CSS)
+static/                 # 정적 파일 (CNAME, ads.txt)
+themes/blowfish/        # Blowfish 테마 (git submodule)
+.github/workflows/      # GitHub Actions 워크플로우
 ```
 
 ## 주요 설정 파일
 
-- `_config.yml`: 사이트 설정, 플러그인, 기본값
-- `_data/navigation.yml`: 사이드바 및 상단 네비게이션 구조
-- `Gemfile`: Ruby 의존성
-- `package.json`: JS 빌드 스크립트 (uglify, banner)
+- `config/_default/hugo.toml`: 사이트 기본 설정 (baseURL, taxonomies, outputs)
+- `config/_default/params.toml`: 테마 파라미터 (컬러 스킴, 레이아웃, TOC 등)
+- `config/_default/languages.ko.toml`: 한국어 언어 및 작성자 정보
+- `config/_default/menus.ko.toml`: 네비게이션 메뉴
+- `config/_default/markup.toml`: Goldmark, 코드 하이라이트, TOC 설정
 
 ## 빌드 명령어
 
 ```bash
-# 의존성 설치
-bundle install
+# 로컬 개발 서버 (Docker)
+docker run --rm -p 1313:1313 -v $(pwd):/src hugomods/hugo:exts server --bind 0.0.0.0
 
-# 로컬 개발 서버 (http://localhost:4000)
-bundle exec jekyll serve
+# 정적 사이트 빌드 (Docker)
+docker run --rm -v $(pwd):/src hugomods/hugo:exts build
 
-# 정적 사이트 빌드
-bundle exec jekyll build
+# 테마 서브모듈 초기화
+git submodule update --init --recursive
 
-# 파일 감시 프리뷰
-bundle exec rake preview
-
-# JavaScript 빌드/압축
-npm run build:js
-
-# Docker 기반 로컬 개발
-./build-and-run.sh
+# 테마 업데이트
+git submodule update --remote themes/blowfish
 ```
-- **컨테이너**: Docker (Alpine Linux 3.16)
-
-## 빌드 & 의존성
-
-- **Ruby**: Bundler (gem 관리)
-- **JavaScript**: npm (자산 빌드 - uglify, banner)
-- **빌드 도구**: Rake (작업 자동화)

@@ -1,0 +1,17 @@
+languageCode = "ko"
+languageName = "한국어"
+weight = 1
+title = "mumbi library"
+
+[params]
+  displayName = "한국어"
+  isoCode = "ko"
+  dateFormat = "2006년 1월 2일"
+  description = "Memories volatilize."
+
+[params.author]
+  name = "mumbi"
+  headline = "Memories volatilize."
+  links = [
+    { github = "https://github.com/mumbi" },
+  ]

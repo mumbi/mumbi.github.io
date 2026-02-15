@@ -1,0 +1,19 @@
+[goldmark]
+  [goldmark.parser]
+    wrapStandAloneImageWithinParagraph = false
+    [goldmark.parser.attribute]
+      block = true
+  [goldmark.renderer]
+    unsafe = true
+  [goldmark.extensions]
+    footnote = true
+    strikethrough = true
+    table = true
+    taskList = true
+
+[highlight]
+  noClasses = false
+
+[tableOfContents]
+  startLevel = 1
+  endLevel = 4
