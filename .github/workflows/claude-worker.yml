@@ -113,6 +113,7 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--model claude-sonnet-4-5-20250929 --allowedTools 'Bash(git:*)' 'Bash(gh:*)'"
+          allowed_bots: "claude[bot]"
           prompt: |
             PR #${{ github.event.pull_request.number }} 에 changes_requested 리뷰가 제출되었습니다.
             AskUserQuestion 도구를 사용하지 마세요. 모든 작업을 자율적으로 수행하세요.
