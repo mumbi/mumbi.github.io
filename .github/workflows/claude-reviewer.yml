@@ -46,7 +46,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--model claude-sonnet-4-5-20250929"
+          claude_args: "--model claude-sonnet-4-5-20250929 --allowedTools 'Bash(gh pr:*)' 'Bash(gh api:*)' 'Bash(git diff:*)' 'Bash(git log:*)'"
           prompt: |
             PR #${{ github.event.pull_request.number }} 을 리뷰해주세요.
             AskUserQuestion 도구를 사용하지 마세요. 모든 작업을 자율적으로 수행하세요.
