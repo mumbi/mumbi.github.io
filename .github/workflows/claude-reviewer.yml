@@ -48,7 +48,9 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--model claude-sonnet-4-5-20250929"
           prompt: |
-            이 PR을 리뷰해주세요.
+            PR #${{ github.event.pull_request.number }} 을 리뷰해주세요.
+            AskUserQuestion 도구를 사용하지 마세요. 모든 작업을 자율적으로 수행하세요.
+            - gh pr diff ${{ github.event.pull_request.number }} 명령으로 변경 내용을 확인합니다
             - 코드 품질, 보안, 성능 문제를 점검합니다
             - 전체 요약은 PR 코멘트로 남깁니다
             - 구체적인 지적사항은 해당 파일/라인에 인라인 리뷰 코멘트로 남깁니다
