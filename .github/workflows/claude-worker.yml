@@ -9,11 +9,10 @@ on:
     types: [submitted]
 
 jobs:
-  worker:
+  issue-worker:
     if: |
       (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude'))) ||
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review' && github.event.review.state == 'changes_requested')
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude'))
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -52,7 +51,6 @@ jobs:
           claude_args: "--model claude-sonnet-4-5-20250929 --allowedTools 'Bash(git:*)' 'Bash(gh:*)'"
 
       - name: Create PR if branch was pushed
-        if: github.event_name == 'issues' || github.event_name == 'issue_comment'
         env:
           GH_TOKEN: ${{ secrets.CLAUDE_CONFIG_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
@@ -75,3 +73,50 @@ jobs:
           else
             echo "Still on master branch — no PR to create"
           fi
+
+  review-feedback:
+    if: github.event_name == 'pull_request_review' && github.event.review.state == 'changes_requested'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Checkout Claude config
+        uses: actions/checkout@v4
+        with:
+          repository: mumbi/claude-config-lead-kor
+          path: .claude-config
+          token: ${{ secrets.CLAUDE_CONFIG_TOKEN }}
+
+      - name: Setup Claude config
+        run: |
+          mkdir -p ~/.claude
+          cp -r .claude-config/* ~/.claude/
+          rm -rf .claude-config
+
+      - name: Setup git identity
+        run: |
+          git config user.name "claude-worker"
+          git config user.email "claude-worker@noreply.github.com"
+
+      - name: Run Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--model claude-sonnet-4-5-20250929 --allowedTools 'Bash(git:*)' 'Bash(gh:*)'"
+          prompt: |
+            PR #${{ github.event.pull_request.number }} 에 changes_requested 리뷰가 제출되었습니다.
+            AskUserQuestion 도구를 사용하지 마세요. 모든 작업을 자율적으로 수행하세요.
+
+            1. gh pr view ${{ github.event.pull_request.number }} --comments 명령으로 리뷰 내용을 확인합니다
+            2. 리뷰에서 지적된 문제를 모두 수정합니다
+            3. 수정 내용을 커밋하고 푸시합니다: git add -A && git commit -m "리뷰 피드백 반영" && git push
