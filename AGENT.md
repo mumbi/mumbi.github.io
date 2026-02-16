@@ -82,44 +82,18 @@ toc: true
 - `/github-check-tasks` — 대기 중인(Todo) 작업 목록 조회
 - `/github-start-task <이슈번호|owner/repo#번호>` — 작업 시작 및 완료 처리
 
-## 자동화 파이프라인 (CI 에이전트 지침)
+## 자동화 파이프라인
 
-### 작업 에이전트 (claude-worker)
+이슈 기반 자동화 파이프라인. 세부 실행 방법은 각 워크플로우 파일 참조.
 
-리드 에이전트로서 이슈에 기술된 작업을 수행하고 PR을 생성한다.
+```
+이슈 생성 (@claude) → 작업 에이전트 → PR 생성 → 리뷰 에이전트 → approve/changes_requested
+```
 
-**핵심 원칙**
-- 이슈에 기술된 요청을 **정확히** 수행한다. 임의로 변경하거나 생략하지 않는다.
-- PR은 반드시 `gh pr create` 명령으로 **직접 생성**한다. 링크 제공이 아닌 **명령 실행**이다.
-
-**1단계: 분석 및 브랜치 생성**
-- 이슈 내용을 꼼꼼히 읽고 요구사항을 파악한다
-- feature 또는 fix 브랜치를 생성한다 (feature/<설명> 또는 fix/<설명>)
-- `git push -u origin <브랜치>`로 리모트에 브랜치를 생성한다
-
-**2단계: 작업 수행**
-- 단일 작업이면 직접 수행한다. 복수 작업이면 커밋 단위로 분해하여 subagent에게 병렬 위임한다.
-- subagent 위임 시: 각 task는 서로 다른 파일을 수정하도록 분배한다
-- subagent 프롬프트에 포함할 것: 작업 내용, 수정 대상 파일, 커밋 메시지
-- 커밋 충돌 시 `git pull --rebase origin <브랜치>` 후 재시도 (최대 3회)
-
-**3단계: PR 생성 (필수)**
-- `git push origin <브랜치>`로 푸시한다
-- 아래 명령을 **반드시 실행**하여 PR을 생성한다:
-  ```
-  gh pr create --base master --head <브랜치> --title "<제목>" --body "<본문>\n\n@claude"
-  ```
-- PR 본문 끝에 반드시 `@claude`를 포함한다 (리뷰 에이전트 트리거용)
-- **주의: PR 생성 링크를 제공하는 것이 아니라, `gh pr create` 명령을 직접 실행해야 한다**
-
-**리뷰 피드백 반영 (pull_request_review changes_requested)**
-1. 리뷰 피드백을 확인한다
-2. 수정이 필요한 항목을 task로 분해하여 subagent에게 병렬 위임한다
-3. 모든 수정 완료 후 푸시한다
-
-### 리뷰 에이전트 (claude-reviewer)
-
-PR을 리뷰한다. 전체 요약은 PR 코멘트로, 구체적인 지적사항은 해당 파일/라인에 인라인 리뷰 코멘트로 남긴다. 문제가 없으면 approve, 수정이 필요하면 request changes로 리뷰를 제출한다.
+| 워크플로우 | 역할 | 트리거 |
+|-----------|------|--------|
+| `claude-worker.yml` | 이슈 작업 수행, 리뷰 피드백 반영 | issues, issue_comment, pull_request_review |
+| `claude-reviewer.yml` | PR 자동 리뷰 | pull_request, pull_request_review_comment |
 
 ## 수익화 운영 지침
 
