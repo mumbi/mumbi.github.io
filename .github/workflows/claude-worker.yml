@@ -54,7 +54,7 @@ jobs:
       - name: Create PR if branch was pushed
         if: github.event_name == 'issues' || github.event_name == 'issue_comment'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.CLAUDE_CONFIG_TOKEN }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
         run: |
