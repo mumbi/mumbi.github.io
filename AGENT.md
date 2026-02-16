@@ -84,16 +84,15 @@ toc: true
 
 ## 자동화 파이프라인
 
-이슈 기반 자동화 파이프라인. 세부 실행 방법은 각 워크플로우 파일 참조.
+이슈 기반 자동화 파이프라인. 세부 지침은 `.github/workflows/` 의 각 워크플로우 파일 참조.
 
 ```
 이슈 생성 (@claude) → 작업 에이전트 → PR 생성 → 리뷰 에이전트 → approve/changes_requested
 ```
 
-| 워크플로우 | 역할 | 트리거 |
-|-----------|------|--------|
-| `claude-worker.yml` | 이슈 작업 수행, 리뷰 피드백 반영 | issues, issue_comment, pull_request_review |
-| `claude-reviewer.yml` | PR 자동 리뷰 | pull_request, pull_request_review_comment |
+- **작업 에이전트** (`claude-task-worker.yml`): 이슈 작업 수행 → 커밋 → PR 생성
+- **리뷰 에이전트** (`claude-reviewer.yml`): PR 자동 리뷰
+- **피드백 에이전트** (`claude-feedback-worker.yml`): 리뷰 피드백 반영 → 커밋
 
 ## 수익화 운영 지침
 

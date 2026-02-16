@@ -1,0 +1,91 @@
+name: Claude Feedback Worker
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  feedback-worker:
+    if: github.event.review.state == 'changes_requested'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Checkout Claude config
+        uses: actions/checkout@v4
+        with:
+          repository: mumbi/claude-config-lead-kor
+          path: .claude-config
+          token: ${{ secrets.CLAUDE_CONFIG_TOKEN }}
+
+      - name: Setup Claude config
+        run: |
+          mkdir -p ~/.claude
+          cp -r .claude-config/* ~/.claude/
+          rm -rf .claude-config
+
+      - name: Setup git identity
+        run: |
+          git config user.name "claude-worker"
+          git config user.email "claude-worker@noreply.github.com"
+
+      - name: Fetch review comments
+        id: review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          REVIEW_BODY=$(gh api "repos/${{ github.repository }}/pulls/${PR_NUMBER}/reviews" \
+            --jq '[.[] | select(.state == "CHANGES_REQUESTED")] | last | .body')
+          REVIEW_COMMENTS=$(gh api "repos/${{ github.repository }}/pulls/${PR_NUMBER}/comments" \
+            --jq '[.[] | {path: .path, line: .line, body: .body}]')
+          {
+            echo "REVIEW_BODY<<ENDOFREVIEW"
+            echo "$REVIEW_BODY"
+            echo "ENDOFREVIEW"
+            echo "REVIEW_COMMENTS<<ENDOFCOMMENTS"
+            echo "$REVIEW_COMMENTS"
+            echo "ENDOFCOMMENTS"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Run Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: "--model claude-sonnet-4-5-20250929 --allowedTools Edit Write Read Glob Grep 'Bash(git:*)' 'Bash(gh:*)'"
+          allowed_bots: "claude[bot]"
+          prompt: |
+            PR #${{ github.event.pull_request.number }} 에 changes_requested 리뷰가 제출되었습니다.
+            AskUserQuestion 도구를 사용하지 마세요. 모든 작업을 자율적으로 수행하세요.
+
+            ## 리뷰 요약
+            ${{ steps.review.outputs.REVIEW_BODY }}
+
+            ## 인라인 코멘트
+            ${{ steps.review.outputs.REVIEW_COMMENTS }}
+
+            위 리뷰에서 지적된 문제를 모두 수정해주세요.
+            파일 수정만 하면 됩니다. 커밋과 푸시는 다음 단계에서 자동으로 처리됩니다.
+
+      - name: Commit and push fixes
+        env:
+          GH_TOKEN: ${{ secrets.CLAUDE_CONFIG_TOKEN }}
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git add -A
+            git commit -m "리뷰 피드백 반영"
+            git push
+            echo "Fixes committed and pushed"
+          else
+            echo "No changes to commit"
+          fi
