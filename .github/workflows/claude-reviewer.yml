@@ -47,3 +47,9 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: "--model claude-sonnet-4-5-20250929"
+          prompt: |
+            이 PR을 리뷰해주세요.
+            - 코드 품질, 보안, 성능 문제를 점검합니다
+            - 전체 요약은 PR 코멘트로 남깁니다
+            - 구체적인 지적사항은 해당 파일/라인에 인라인 리뷰 코멘트로 남깁니다
+            - 문제가 없으면 approve, 수정이 필요하면 request changes로 리뷰를 제출합니다
