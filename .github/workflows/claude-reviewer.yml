@@ -42,6 +42,23 @@ jobs:
           git config user.name "claude-reviewer"
           git config user.email "claude-reviewer@noreply.github.com"
 
+      - name: Fetch PR info and diff
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          PR_INFO=$(gh pr view "$PR_NUMBER" --json title,body,headRefName,baseRefName,changedFiles,additions,deletions)
+          PR_DIFF=$(gh pr diff "$PR_NUMBER")
+          {
+            echo "PR_INFO<<ENDOFPRINFO"
+            echo "$PR_INFO"
+            echo "ENDOFPRINFO"
+            echo "PR_DIFF<<ENDOFDIFF"
+            echo "$PR_DIFF"
+            echo "ENDOFDIFF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Run Claude Code
         uses: anthropics/claude-code-action@v1
         with:
@@ -50,8 +67,15 @@ jobs:
           prompt: |
             PR #${{ github.event.pull_request.number }} 을 리뷰해주세요.
             AskUserQuestion 도구를 사용하지 마세요. 모든 작업을 자율적으로 수행하세요.
-            - gh pr diff ${{ github.event.pull_request.number }} 명령으로 변경 내용을 확인합니다
-            - 코드 품질, 보안, 성능 문제를 점검합니다
-            - 전체 요약은 PR 코멘트로 남깁니다
+
+            ## PR 정보
+            ${{ steps.pr.outputs.PR_INFO }}
+
+            ## 변경 내용 (diff)
+            ${{ steps.pr.outputs.PR_DIFF }}
+
+            ## 리뷰 지침
+            - 위 diff를 분석하여 코드 품질, 보안, 성능 문제를 점검합니다
+            - 전체 요약은 gh pr comment 명령으로 PR 코멘트로 남깁니다
             - 구체적인 지적사항은 해당 파일/라인에 인라인 리뷰 코멘트로 남깁니다
-            - 문제가 없으면 approve, 수정이 필요하면 request changes로 리뷰를 제출합니다
+            - 문제가 없으면 gh pr review --approve, 수정이 필요하면 gh pr review --request-changes로 리뷰를 제출합니다
