@@ -6,7 +6,6 @@ tags: ["AI 에이전트", "Claude", "1인 개발자", "멀티 에이전트", "�
 description: "1인 개발자가 AI 에이전트를 직원처럼 활용하는 멀티 에이전트 조직 구조를 설계한 과정. 계층 구조, 파일 기반 메시지 패싱, GitHub Actions 연동까지."
 author: "mumbi"
 draft: false
-image: /assets/img/posts/2026-02-17-multi-agent-company-01.webp
 toc: true
 ---
 
