@@ -2,12 +2,10 @@
 title: "1인 개발자가 AI 멀티 에이전트 회사를 차린 이유"
 date: 2026-02-17T10:00:00+09:00
 categories: [AI, 개발]
-tags: [1인개발자, AI에이전트, 멀티에이전트, Claude, 자동화, 1인기업]
+tags: [1인-개발자, AI-에이전트, 멀티-에이전트, Claude, 자동화, 1인-기업]
 description: "1인 개발자가 AI 에이전트를 직원처럼 활용해 콘텐츠 파이프라인을 자동화한 구상과 설계 과정을 공개합니다."
 author: mumbi
-image: /assets/img/posts/claude-code-multi-agent-01.webp
 toc: true
-draft: true
 ---
 
 1인 개발자로 살다 보면 항상 같은 벽에 부딪힌다. **시간이 부족하다.**
