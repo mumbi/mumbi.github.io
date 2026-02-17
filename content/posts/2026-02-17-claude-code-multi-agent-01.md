@@ -5,6 +5,7 @@ categories: [AI, 개발]
 tags: [1인개발자, AI에이전트, 멀티에이전트, Claude, 자동화, 1인기업]
 description: "1인 개발자가 AI 에이전트를 직원처럼 활용해 콘텐츠 파이프라인을 자동화한 구상과 설계 과정을 공개합니다."
 author: mumbi
+image: /assets/img/posts/claude-code-multi-agent-01.webp
 toc: true
 draft: true
 ---
