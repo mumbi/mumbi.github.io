@@ -23,6 +23,21 @@
 - **Permalink 형식**: 프론트매터 `url` 필드로 지정
 - **섹션 인덱스**: `content/posts/_index.md`
 
+### 프론트매터 템플릿
+
+```yaml
+---
+title: "60자 이내 SEO 제목"
+date: YYYY-MM-DDTHH:MM:SS+09:00
+categories: [카테고리]
+tags: [태그1, 태그2, 태그3]
+description: "155자 이내 메타 설명"
+image: /assets/img/posts/파일명.webp
+author: 작성자
+toc: true
+---
+```
+
 ## 프로젝트 디렉토리
 
 ```
