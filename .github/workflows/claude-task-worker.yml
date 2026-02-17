@@ -76,10 +76,13 @@ jobs:
 
       - name: Commit and push changes
         id: push
+        env:
+          GH_TOKEN: ${{ secrets.CLAUDE_CONFIG_TOKEN }}
         run: |
           if [ -n "$(git status --porcelain)" ]; then
             git add -A
             git commit -m "chore: 작업 에이전트 변경사항 커밋"
+            git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git"
             git push -u origin HEAD
             echo "pushed=true" >> "$GITHUB_OUTPUT"
           else
