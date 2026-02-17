@@ -23,6 +23,7 @@ jobs:
         with:
           fetch-depth: 1
           submodules: recursive
+          token: ${{ secrets.CLAUDE_CONFIG_TOKEN }}
 
       - name: Checkout Claude config
         uses: actions/checkout@v4
