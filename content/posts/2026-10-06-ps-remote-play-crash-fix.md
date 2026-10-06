@@ -5,6 +5,8 @@ categories: ["windows"]
 tags: ["windows", "ps-remote-play", "0xc0000005", "UnifiedTelemetry", "windbg", "dll"]
 url: "/windows/ps-remote-play-crash-fix/"
 description: "PS Remote Play 가 PS 연결 직후 꺼지는 원인은 텔레메트리 DLL 이었습니다. 덤프 분석으로 원인을 찾고 대체 DLL 로 해결한 과정과, 9.x 에서는 안 되는 이유를 정리합니다."
+image: "https://github.com/user-attachments/assets/8b7c06e6-5037-42be-9031-39b69f75a1d2"
+images: ["https://github.com/user-attachments/assets/8b7c06e6-5037-42be-9031-39b69f75a1d2"]
 author: "mumbi"
 draft: false
 toc: true
@@ -98,10 +100,13 @@ Get-AuthenticodeSignature .\RemotePlayInstaller_8.5.0.08070_x64.msi
 C 소스(`src\`)도 함께 들어 있으니 직접 빌드하셔도 됩니다.
 
 ```bash
-gcc -shared -O2 -s -static-libgcc -o UnifiedTelemetry.Service.dll ut_service.c
-gcc -shared -O2 -s -static-libgcc -o UnifiedTelemetry.Client.dll  ut_client.c
-gcc -shared -O2 -s -static-libgcc -o UnifiedTelemetry.Model.dll   ut_model.c
+cd src
+gcc -shared -O2 -s -static-libgcc -o ../UnifiedTelemetry.Service.dll ut_service.c
+gcc -shared -O2 -s -static-libgcc -o ../UnifiedTelemetry.Client.dll  ut_client.c
+gcc -shared -O2 -s -static-libgcc -o ../UnifiedTelemetry.Model.dll   ut_model.c
 ```
+
+빌드 결과는 `install-stub.ps1` 이 있는 상위 폴더에 덮어씁니다.
 
 Remote Play 를 종료한 상태에서, **관리자 PowerShell** 로 압축을 푼 폴더에서 실행합니다.
 
