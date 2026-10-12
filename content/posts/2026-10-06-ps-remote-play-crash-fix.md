@@ -5,8 +5,8 @@ categories: ["windows"]
 tags: ["ps-remote-play", "0xc0000005", "UnifiedTelemetry", "windbg", "dll"]
 url: "/windows/ps-remote-play-crash-fix/"
 description: "Windows 용 PS Remote Play 가 PS 연결 직후 강제 종료되던 문제를 덤프로 분석해 텔레메트리 DLL 에서 원인을 찾고, 대체 DLL 로 해결한 과정과 9.5 에서는 안 되는 이유를 정리합니다."
-image: "https://github.com/user-attachments/assets/8b7c06e6-5037-42be-9031-39b69f75a1d2"
-images: ["https://github.com/user-attachments/assets/8b7c06e6-5037-42be-9031-39b69f75a1d2"]
+image: "https://github.com/user-attachments/assets/4d6376dd-ce18-4baa-8e3d-4de9c5e4b672"
+images: ["https://github.com/user-attachments/assets/4d6376dd-ce18-4baa-8e3d-4de9c5e4b672"]
 author: "mumbi"
 draft: false
 toc: true
@@ -141,9 +141,9 @@ powershell -ExecutionPolicy Bypass -File .\install-stub.ps1 -Restore
 
 이제 Remote Play 를 실행해 연결하면 됩니다.
 
-![대체 DLL 적용 후 PS Remote Play 시작 화면](https://github.com/user-attachments/assets/366bd3e3-3ad4-4546-b543-ac90044e3275)
+![대체 DLL 적용 후 PS Remote Play 시작 화면](https://github.com/user-attachments/assets/33f48dbd-9921-4e6d-ba9e-9fb2b4ed98b5)
 
-![대체 DLL 적용 후 PS5 에 정상 연결된 PS Remote Play](https://github.com/user-attachments/assets/8b7c06e6-5037-42be-9031-39b69f75a1d2)
+![대체 DLL 적용 후 PS5 에 정상 연결된 PS Remote Play](https://github.com/user-attachments/assets/4d6376dd-ce18-4baa-8e3d-4de9c5e4b672)
 
 {{< alert "circle-info" >}}
 Remote Play 가 업데이트되면 다시 꺼질 수 있습니다. 9.x 로 올라갔다면 대체 DLL 이 통하지 않으니 8.5 를 다시 설치하고 버전 패처를 실행한 뒤 `install-stub.ps1` 을 다시 실행하세요. 8.5 를 재설치만 했다면 버전 패처와 스크립트를 다시 실행하면 됩니다.
