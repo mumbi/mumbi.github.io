@@ -1,0 +1,19 @@
+/*
+ * 본문 링크 구분
+ * noir 색 구성은 링크 색(primary)이 본문 글자와 거의 같고, Blowfish 는 본문 링크 밑줄을 끈다.
+ * 마크다운 링크(클래스 없음)에만 밑줄을 넣는다. 테마가 만든 링크(헤딩 앵커 등)는 클래스가 있어 제외된다.
+ */
+.prose a:not([class]) {
+  text-decoration-line: underline;
+  text-decoration-color: rgba(var(--color-secondary-600), 1);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.dark .prose a:not([class]) {
+  text-decoration-color: rgba(var(--color-secondary-400), 1);
+}
+
+.prose a:not([class]):hover {
+  text-decoration-thickness: 2px;
+}
