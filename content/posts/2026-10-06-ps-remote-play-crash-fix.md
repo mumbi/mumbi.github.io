@@ -146,7 +146,7 @@ powershell -ExecutionPolicy Bypass -File .\install-stub.ps1 -Restore
 ![대체 DLL 적용 후 PS5 에 정상 연결된 PS Remote Play](https://github.com/user-attachments/assets/4d6376dd-ce18-4baa-8e3d-4de9c5e4b672)
 
 {{< alert "circle-info" >}}
-Remote Play 가 업데이트되면 다시 꺼질 수 있습니다. 9.x 로 올라갔다면 대체 DLL 이 통하지 않으니 8.5 를 다시 설치하고 버전 패처를 실행한 뒤 `install-stub.ps1` 을 다시 실행하세요. 8.5 를 재설치만 했다면 버전 패처와 스크립트를 다시 실행하면 됩니다.
+Remote Play 가 업데이트되면 다시 꺼질 수 있습니다. 9.x 로 올라갔다면 8.5 를 다시 설치하고 버전 패처를 실행한 뒤 `install-stub.ps1` 을 다시 실행하세요(9.5 에서는 대체 DLL 이 통하지 않는 것을 확인했습니다). 8.5 를 재설치만 했다면 버전 패처와 스크립트를 다시 실행하면 됩니다.
 {{< /alert >}}
 
 ## 원인 분석
@@ -226,7 +226,7 @@ UnifiedTelemetry_Service!utGetServiceConfig:
 | `utServiceGetCommonPropertiesObject` | 4 바이트(int) | 원본과 같은 8 바이트(포인터) |
 | `utCreateService` 등 생성 함수 | 8 바이트 핸들 | 원본과 같은 8 바이트 핸들 |
 
-Remote Play 가 쓰지 않아 크기를 확인하지 못한 함수의 출력은 건드리지 않고, 모든 함수가 성공(0)을 돌려줍니다.
+Remote Play 가 쓰지 않아 크기를 확인하지 못한 함수의 출력은 건드리지 않습니다. 반환값이 있는 함수는 모두 성공(0)을 돌려주고, 공통 속성 객체를 넘겨주는 `utServiceGetCommonPropertiesObject`·`utGetCommonPropertiesObject` 는 반환값 없이(void) 포인터 자리에 0 만 씁니다.
 
 ```c
 #define UT_SERVICE_CONFIG_SIZE 0x816
