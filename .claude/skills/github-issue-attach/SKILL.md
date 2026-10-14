@@ -30,6 +30,7 @@ REST API 에는 첨부 업로드 엔드포인트가 없다. 이미지·영상은
 3. `media` 업로드(gh)
    - 본문 파일에 파일마다 `![<alt>](./<파일 이름>)` 줄을 쓰고 `gh issue comment <번호> -R <owner/name> --body-file <파일> --attach '<전체 경로>#<alt>' ...` 로 올린다. gh 가 본문의 참조를 업로드 URL 로 바꾼다
    - 올린 댓글 본문을 `gh api repos/<owner/name>/issues/comments/<id> --jq .body` 로 읽어 파일마다 URL 을 뽑는다
+   - 뽑은 URL 이 `https://github.com/user-attachments/` 로 시작하지 않거나 URL 이 없는 파일은 `other` 로 옮겨 4의 브라우저 업로드로 다시 올린다
 4. `other` 업로드(브라우저, 컴퓨터 유즈). 다른 세션이나 사용자가 같은 브라우저·화면을 쓰고 있을 수 있다
    - 이슈 URL 은 `Start-Process <이슈 URL>` 로 OS 가 기본 브라우저의 새 탭에 열게 한다. 앱 단축키(Ctrl+T)나 기존 탭 주소창 바꾸기는 다른 세션의 탭을 덮을 수 있으므로 쓰지 않는다
    - 클릭·키 입력 전에 `get-app-state` 의 스크린샷과 창 제목으로 브라우저가 맨 앞이고 이슈 탭이 활성인지 확인한다. 아니면 조작하지 말고, 브라우저를 앞에 두고 조작하는 동안 입력을 멈춰 달라고 사용자에게 요청한 뒤 "준비됨"을 기다린다
