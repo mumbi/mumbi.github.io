@@ -1,0 +1,2 @@
+# 워크플로 스킬(pipecheck)은 LF 줄 끝의 frontmatter 만 읽는다. Windows autocrlf 체크아웃에서도 LF 를 유지한다.
+.claude/skills/** text eol=lf
