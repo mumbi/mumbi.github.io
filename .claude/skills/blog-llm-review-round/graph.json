@@ -1,0 +1,33 @@
+{
+  "name": "blog-llm-review-round",
+  "in": {
+    "worktree_dir": { "shape": "text" },
+    "post_path": { "shape": "text" },
+    "materials_dir": { "shape": "text" }
+  },
+  "out": {
+    "clean": { "shape": "bool" }
+  },
+  "nodes": [
+    { "id": "review_codex", "kind": "node", "skill": "blog-llm-review", "const": { "reviewer": "codex" } },
+    { "id": "review_claude", "kind": "node", "skill": "blog-llm-review", "const": { "reviewer": "claude" } },
+    { "id": "apply", "kind": "node", "skill": "blog-post-apply-findings" }
+  ],
+  "edges": [
+    { "from": "graph.in.worktree_dir", "to": "review_codex.in.worktree_dir" },
+    { "from": "graph.in.post_path", "to": "review_codex.in.post_path" },
+    { "from": "graph.in.materials_dir", "to": "review_codex.in.materials_dir" },
+    { "from": "graph.in.worktree_dir", "to": "review_claude.in.worktree_dir" },
+    { "from": "graph.in.post_path", "to": "review_claude.in.post_path" },
+    { "from": "graph.in.materials_dir", "to": "review_claude.in.materials_dir" },
+    { "from": "review_codex.out.findings", "to": "apply.in.findings" },
+    { "from": "review_claude.out.findings", "to": "apply.in.findings" },
+    { "from": "graph.in.worktree_dir", "to": "apply.in.worktree_dir" },
+    { "from": "graph.in.post_path", "to": "apply.in.post_path" },
+    { "from": "apply.out.clean", "to": "graph.out.clean" }
+  ],
+  "materials": [
+    { "name": "blog-llm-review", "scope": "project", "contract": "sha256:fb0c69e5b06a8ffd04a2fa8b51987ad15ec9801952a80166b24070fc9d8577dc", "body": "sha256:89b011270c31a888f1a63a6ba7bfe4659a53bb2ab1e07ae8b443539b555ac966" },
+    { "name": "blog-post-apply-findings", "scope": "project", "contract": "sha256:11415598bca794761281679a687f004092121536ae5ddb45d41a92e6caff2daf", "body": "sha256:651480266036c7db8f0514b587f45ddf7fcd9b73a7d5eed6a1b8d2eae326dac3" }
+  ]
+}
