@@ -1,6 +1,6 @@
 ---
 name: blog-post-publish
-description: 블로그 자료 폴더와 주제로 글 규칙 조사 → 기획 → 첨부 이슈 → 초안 → LLM 리뷰 반복 → 사용자 검토 → PR → 리뷰 봇 대응까지 진행해 PR URL 을 낸다(머지는 하지 않음)
+description: 블로그 자료 폴더와 주제로 글 규칙 조사 → 기획 → 첨부 이슈 → 초안 → LLM 리뷰 반복 → rubric 채점·반영 → 사용자 검토 → PR → 리뷰 봇 대응까지 진행해 PR URL 을 낸다(머지는 하지 않음)
 node:
   in:
     repo_dir: { shape: text }
@@ -21,7 +21,7 @@ node:
 
 같은 디렉터리의 `graph.json`이 이 워크플로의 정본이다.
 
-원격 기본 브랜치에서 글 규칙을 조사하고(conv), 자료로 제목·slug·첨부 계획을 정한 뒤(plan), 첨부 파일을 준비해(prep) 글 추적 이슈에 올린다(attach). 첨부 URL 로 새 worktree 에 초안을 쓰고(draft), codex·claude 리뷰와 반영을 지적이 없을 때까지 최대 3회 되풀이한다(llm_review). 그 뒤 사용자가 미리보기로 검토하고(review), PR 을 연 뒤(pr) 리뷰 봇 지적 대응을 최대 3회 되풀이해(pr_review) PR URL 을 낸다.
+원격 기본 브랜치에서 글 규칙을 조사하고(conv), 자료로 제목·slug·첨부 계획을 정한 뒤(plan), 첨부 파일을 준비해(prep) 글 추적 이슈에 올린다(attach). 첨부 URL 로 새 worktree 에 초안을 쓰고(draft), codex·claude 리뷰와 반영을 지적이 없을 때까지 최대 3회 되풀이한다(llm_review). 이어서 codex 가 글쓰기 규칙으로 한 번 채점하고(rubric) 그 지적을 한 번 반영한다(rubric_apply). 그 뒤 사용자가 rubric 점수(score_list 로 배열에 담아 넘긴다)와 함께 미리보기로 검토하고(review), PR 을 연 뒤(pr) 리뷰 봇 지적 대응을 최대 3회 되풀이해(pr_review) PR URL 을 낸다.
 
 ```
 graph.in.repo_dir (text)   graph.in.topic (text)   graph.in.materials_dir (text)
@@ -43,8 +43,8 @@ graph.in.repo_dir (text)   graph.in.topic (text)   graph.in.materials_dir (text)
     │ issue_number (num) → pr.in.issue_number
     ▼
  [draft]  (from graph.in.repo_dir, graph.in.topic, graph.in.materials_dir, conv.out.conventions, plan.out.slug, plan.out.title)
-    │ worktree_dir (text) → llm_review.in.worktree_dir, review.in.worktree_dir, pr.in.worktree_dir
-    │ post_path (text) → llm_review.in.post_path, review.in.post_path
+    │ worktree_dir (text) → llm_review.in.worktree_dir, rubric.in.worktree_dir, rubric_apply.in.worktree_dir, review.in.worktree_dir, pr.in.worktree_dir
+    │ post_path (text) → llm_review.in.post_path, rubric.in.post_path, rubric_apply.in.post_path, review.in.post_path
     ▼
 ╭─ llm_review ── condition ───────╮
 │  until clean                    │   (from graph.in.materials_dir)
@@ -54,7 +54,15 @@ graph.in.repo_dir (text)   graph.in.topic (text)   graph.in.materials_dir (text)
     ╎
     ╎ order
     ▼
- [review]
+ [rubric]  reviewer='codex'
+    │ findings (json, list:1)              │ score (json)
+    ▼                                      ▼
+ [rubric_apply]                         < score_list >
+    │ clean (bool) — 미연결                expr scores = [score]
+    ╎                                      │ scores (json, list:1) → review.in.rubric_score
+    ╎ order                                │
+    ▼                                      │
+ [review]  ◄───────────────────────────────┘
     │ reviewed_post (text)
     ▼
  [pr]
