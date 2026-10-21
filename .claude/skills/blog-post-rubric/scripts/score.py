@@ -2,12 +2,16 @@
 
 사용: python score.py --rubric <rubric.json> --post <글.md> --review <채점자 stdout 파일> --reviewer <codex|claude> [--out <결과.json>]
 
+rubric.json 에서 "auto": true 인 항목은 채점자가 내지 않고 auto_items.py 가 원문에서 센다.
+
 종료 코드: 0 성공, 1 채점자 출력 검증 실패(errors 를 채점자에게 돌려 다시 시킨다), 2 사용법·입력 파일 오류
 """
 import argparse
 import json
 import re
 import sys
+
+import auto_items
 
 MARKUP = re.compile(r"[*`]")
 SPACE = re.compile(r"\s+")
@@ -53,14 +57,19 @@ def validate(rubric, review, post_text):
 
     check_quote("type_evidence", review.get("type_evidence", ""))
 
+    auto_ids = {i["id"] for i in rubric["items"] if i.get("auto")}
     by_id = {}
     for entry in review.get("items", []):
+        if entry.get("id") in auto_ids:
+            continue  # 채점자가 자동 항목을 내도 거부하지 않고 버린다. 다시 시킬 이유가 없다
         if entry.get("id") in by_id:
             errors.append(f"{entry.get('id')} 가 두 번 나온다")
         by_id[entry.get("id")] = entry
 
     for item in rubric["items"]:
         cid = item["id"]
+        if item.get("auto"):
+            continue
         entry = by_id.get(cid)
         if entry is None:
             errors.append(f"{cid} 가 없다")
@@ -76,14 +85,16 @@ def validate(rubric, review, post_text):
             errors.append(f"{cid} 는 {score}점인데 evidence 인용이 없다")
         check_quote(cid, entry.get("evidence", ""))
 
-    unknown = set(by_id) - {i["id"] for i in rubric["items"]}
+    unknown = set(by_id) - {i["id"] for i in rubric["items"]} - auto_ids
     if unknown:
         errors.append(f"기준에 없는 항목: {sorted(unknown)}")
     return errors
 
 
-def compute(rubric, review, reviewer):
-    by_id = {e["id"]: e for e in review["items"]}
+def compute(rubric, review, reviewer, post_text):
+    auto_ids = {i["id"] for i in rubric["items"] if i.get("auto")}
+    by_id = {e["id"]: e for e in review["items"] if e["id"] not in auto_ids}
+    by_id.update({e["id"]: e for e in auto_items.check(post_text) if e["id"] in auto_ids})
     raw_sections = []
     for section in rubric["sections"]:
         scores = [by_id[i["id"]]["score"] for i in rubric["items"] if i["section"] == section["id"]]
@@ -174,7 +185,7 @@ def main():
         if errors:
             result = {"ok": False, "errors": errors}
         else:
-            score, findings = compute(rubric, review, args.reviewer)
+            score, findings = compute(rubric, review, args.reviewer, post_text)
             result = {"ok": True, "score": score, "findings": findings}
 
     text = json.dumps(result, ensure_ascii=False, indent=2)

@@ -19,7 +19,7 @@ node:
 ## 실행
 `recipe:oneshot` 스킬의 래퍼로 실행한다. 채점자는 글을 쓴 세션과 컨텍스트를 공유하지 않는다. 글을 쓴 세션이 직접 채점하면 자기 글에 후해지기 때문이다. 이 스킬을 부른 세션은 점수를 고치지 않는다.
 
-1. **준비.** 실행마다 새 임시 디렉터리를 만든다(`tmp=$(mktemp -d)`). codex 와 claude 채점이 병렬로 돌 수 있어 고정 파일 이름을 공유하면 서로 덮어쓴다. 이 디렉터리에 `prompt.txt`, `stdout.txt`, `stderr.txt`, `result.json` 을 둔다.
+1. **준비.** 실행마다 새 임시 디렉터리를 만든다(`tmp=$(mktemp -d)`). codex 와 claude 채점이 병렬로 돌 수 있어 고정 파일 이름을 공유하면 서로 덮어쓴다. 이 디렉터리에 `prompt.txt`, `stdout.txt`, `stderr.txt`, `result.json` 을 둔다. Windows 의 Git Bash 에서는 `mktemp` 가 `/tmp/...` 경로를 준다. 명령 인자로 넘기면 Git Bash 가 바꿔 주지만 `python -c` 코드 문자열 안에 넣으면 바뀌지 않으므로, 그럴 때는 `cygpath -m "$tmp"` 로 바꾼 경로를 쓴다.
 2. **프롬프트.** `prompt.txt` 를 BOM 없는 UTF-8 로 쓴다. 아래 틀을 그대로 쓰고 `<...>` 만 바꾼다. 채점 기준은 경로가 아니라 `references/rubric.md` 본문 전체를 붙인다. 글이 있는 worktree 에는 이 스킬이 없을 수 있기 때문이다.
 
    ````text
@@ -35,11 +35,11 @@ node:
    <references/rubric.md 본문 전체>
    ````
 3. **실행.** `worktree_dir` 에서 `bash "$oneshot/references/oneshot.sh" --mode read --prompt-file "$tmp/prompt.txt" <reviewer> > "$tmp/stdout.txt" 2> "$tmp/stderr.txt"` 를 실행한다. `$oneshot` 은 설치된 recipe 플러그인의 oneshot 스킬 디렉터리다. 여러 버전이 있으면 가장 높은 버전을 쓴다(`ls -d ~/.claude/plugins/cache/*/recipe/*/skills/oneshot | sort -V | tail -1`). 모델과 effort 는 지정하지 않고 CLI 기본값을 쓴다. 종료 코드 0 또는 3(강등 — stdout 에 결과 있음)이면 다음 단계로 간다. stderr 는 codex 세션 로그가 항상 섞이므로 성공 판정에 쓰지 않고, 실패했을 때 원인을 찾는 데만 본다
-4. **검증·계산.** `python <이 스킬 디렉터리>/scripts/score.py --rubric <이 스킬 디렉터리>/references/rubric.json --post <post_path> --review "$tmp/stdout.txt" --reviewer <reviewer> --out "$tmp/result.json"` (`python` 이 없으면 `python3`). 스크립트가 항목 누락, 점수 범위, 글 유형별 N/A 허용 여부, 인용이 글에 실제로 있는지를 검사하고 총점을 계산한다. 총점은 채점자에게 맡기지 않는다
+4. **검증·계산.** `python <이 스킬 디렉터리>/scripts/score.py --rubric <이 스킬 디렉터리>/references/rubric.json --post <post_path> --review "$tmp/stdout.txt" --reviewer <reviewer> --out "$tmp/result.json"` (`python` 이 없으면 `python3`). 스크립트가 C1~C17 의 누락, 점수 범위, 글 유형별 N/A 허용 여부, 인용이 글에 실제로 있는지를 검사한다. 원문에서 셀 수 있는 C18~C20 은 같은 디렉터리의 `auto_items.py` 로 직접 센 뒤 총점을 계산한다. 총점은 채점자에게 맡기지 않는다. 결과는 `--out` 파일과 stdout 에 같은 JSON 으로 나오고, 실패 사유는 그 JSON 의 `errors` 에 있다
 5. **다시 시키기(한 번만).** 3단계 종료 코드가 0·3 이 아니거나 4단계가 종료 코드 1(`ok: false`)이면, `prompt.txt` 끝에 아래 문단을 붙여 3·4단계를 한 번 더 실행한다. 3단계가 실패했으면 `<문제>` 에는 stderr 마지막 몇 줄의 요약을, 4단계가 실패했으면 `errors` 를 한 줄에 하나씩 넣는다. 처음부터 다시 채점하게 하는 것이므로 직전 출력은 붙이지 않는다
 
    ```text
-   직전 출력의 문제(이것을 고쳐 C1~C20 전체를 다시 출력한다):
+   직전 출력의 문제(이것을 고쳐 C1~C17 전체를 다시 출력한다):
    - <문제>
    ```
 6. **실패로 끝내기.** 두 번째도 실패하면 `score` 는 `{"total": null, "reviewer": <reviewer>, "error": "<요약>"}`, `findings` 는 `{"severity": "P1", "category": "writing", "location": "-", "issue": "<reviewer> 채점 실패: <요약>", "suggestion": "수동 채점", "reviewer": <reviewer>}` 하나로 낸다. 이때는 임시 디렉터리를 지우지 않고 경로를 보고해, 사람이 stdout·stderr 를 볼 수 있게 한다
