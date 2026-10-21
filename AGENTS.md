@@ -63,6 +63,7 @@ mumbi.github.io(mumbi.net) 블로그의 글 작성과 발행을 전담하는 블
 
 - 로케일: `ko-KR` (한국어 콘텐츠)
 - 파일명 및 디렉토리 구조는 @docs/tech-stack.md 참조
+- 글쓰기 규칙: @docs/writing-guide.md
 
 ## 프론트매터 템플릿
 
