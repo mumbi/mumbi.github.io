@@ -22,11 +22,12 @@ node:
 REST API 에는 첨부 업로드 엔드포인트가 없다. 이미지·영상은 gh 2.99.0 이상의 `--attach` 로 올리고, 그 밖의 파일은 브라우저로 올린다.
 
 1. 준비
-   - `gh auth status` 로 로그인 계정을 확인한다. 미인증이면 `gh auth login -h github.com -p https -w -s repo,read:org` 를 백그라운드로 띄워 일회용 코드를 받고, 브라우저의 `https://github.com/login/device` 에서 저장소 소유 계정으로 로그인돼 있는지 사용자에게 확인받는다. 다른 계정이면 사용자가 직접 로그인하게 한다(비밀번호는 입력하지 않는다)
+   - `gh auth status` 로 로그인 계정을 확인한다. 미인증이면 `gh auth login -h github.com -p https -w -s repo,read:org,project` 를 백그라운드로 띄워 일회용 코드를 받고, 브라우저의 `https://github.com/login/device` 에서 저장소 소유 계정으로 로그인돼 있는지 사용자에게 확인받는다. 다른 계정이면 사용자가 직접 로그인하게 한다(비밀번호는 입력하지 않는다)
+   - 이슈는 `mumbi.net` 프로젝트(칸반)에 등록해야 한다(AGENTS.md 의 GitHub Projects 작업 관리). `gh auth status` 의 Token scopes 에 `project` 가 없으면 `gh auth refresh -h github.com -s project` 로 권한을 더하고, 브라우저 확인은 로그인과 같은 방법으로 받는다
    - 토큰이 `ghu_`(GitHub App 사용자 토큰)면 `--attach` 가 거부된다(cli/cli#14495). 이때는 이미지도 브라우저로 올린다
    - `gh --version` 이 2.99.0 미만이면 업그레이드할지 사용자에게 묻는다(winget 은 UAC 확인이 필요하므로 포그라운드로 실행한다). 거절하면 이미지도 브라우저로 올린다
    - `files` 를 확장자로 나눈다: 이미지·영상(`png jpg jpeg gif webp svg mp4 mov webm`)은 `media`, 나머지는 `other`
-2. 본문을 BOM 없는 UTF-8 파일로 쓰고 `gh issue create -R <owner/name> --title <issue_title> --body-file <파일>` 로 이슈를 만든다(PowerShell `Set-Content -Encoding utf8` 은 BOM 을 붙이므로 `[IO.File]::WriteAllText(..., New-Object Text.UTF8Encoding($false))` 를 쓴다)
+2. 본문을 BOM 없는 UTF-8 파일로 쓰고 `gh issue create -R <owner/name> --title <issue_title> --body-file <파일> --project "mumbi.net"` 로 이슈를 만든다. 프로젝트 워크플로가 상태를 Todo 로 둔다(PowerShell `Set-Content -Encoding utf8` 은 BOM 을 붙이므로 `[IO.File]::WriteAllText(..., New-Object Text.UTF8Encoding($false))` 를 쓴다)
 3. `media` 업로드(gh)
    - 본문 파일에 파일마다 `![<alt>](./<파일 이름>)` 줄을 쓰고 `gh issue comment <번호> -R <owner/name> --body-file <파일> --attach '<전체 경로>#<alt>' ...` 로 올린다. gh 가 본문의 참조를 업로드 URL 로 바꾼다
    - 올린 댓글 본문을 `gh api repos/<owner/name>/issues/comments/<id> --jq .body` 로 읽어 파일마다 URL 을 뽑는다

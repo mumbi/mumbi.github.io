@@ -105,6 +105,7 @@ def check(text):
     overflow, broken = [], []
 
     # 표: 머리글 다음 줄이 구분선인 연속된 | 줄 묶음
+    table_lines = set()
     i = 0
     while i < len(prose) - 1:
         no, line = prose[i]
@@ -115,6 +116,8 @@ def check(text):
             while j < len(prose) and prose[j][0] == prose[j - 1][0] + 1 and "|" in prose[j][1]:
                 rows.append(prose[j])
                 j += 1
+            table_lines.update(rno for rno, _ in rows)
+            table_lines.add(prose[i + 1][0])
             long_cell = next((c for _, r in rows for c in cells(r) if max(map(len, c.split()), default=0) >= LONG_TOKEN), None)
             if ncol >= 5:
                 overflow.append((no, line.strip(), f"열이 {ncol}개인 표"))
@@ -126,10 +129,9 @@ def check(text):
             i = j
             continue
         i += 1
-    table_lines = {no for no, _ in overflow + broken}
 
     for no, line in prose:
-        if no in table_lines or line.lstrip().startswith("|"):
+        if no in table_lines:
             continue
         # 링크 주소는 화면에 보이지 않으므로 빼고, 남은 마크다운 기호도 빼고 잰다
         visible = MARKUP.sub("", LINK_TARGET.sub("] ", line))
