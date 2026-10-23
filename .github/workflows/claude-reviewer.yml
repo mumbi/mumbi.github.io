@@ -63,7 +63,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--model claude-sonnet-4-5-20250929 --allowedTools Read Glob Grep 'Bash(gh pr:*)' 'Bash(gh api:*)' 'Bash(git diff:*)' 'Bash(git log:*)'"
+          claude_args: "--model claude-sonnet-4-5-20250929 --allowedTools Read Glob Grep Write 'Bash(gh pr:*)' 'Bash(gh api:*)' 'Bash(git diff:*)' 'Bash(git log:*)'"
           prompt: |
             PR #${{ github.event.pull_request.number }} 을 리뷰해주세요.
             AskUserQuestion 도구를 사용하지 마세요. 모든 작업을 자율적으로 수행하세요.
@@ -79,3 +79,6 @@ jobs:
             - 전체 요약은 gh pr comment 명령으로 PR 코멘트로 남깁니다
             - 구체적인 지적사항은 해당 파일/라인에 인라인 리뷰 코멘트로 남깁니다
             - 문제가 없으면 gh pr review --approve, 수정이 필요하면 gh pr review --request-changes로 리뷰를 제출합니다
+            - 코멘트·리뷰 본문은 Write 도구로 `.review/` 아래 파일에 쓰고 `--body-file` 로 넘깁니다. 명령에 `$(...)`, heredoc, 파이프, `&&` 를 쓰면 권한이 거부됩니다
+            - 인라인 코멘트는 `gh api repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/comments -f commit_id=${{ github.event.pull_request.head.sha }} -f path=<파일> -F line=<줄> -f side=RIGHT -F body=@.review/<파일>` 로 남깁니다
+            - 리뷰를 제출하지 못하고 끝내지 않습니다. 명령이 거부되면 위 방법으로 다시 시도합니다
