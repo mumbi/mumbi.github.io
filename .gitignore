@@ -38,3 +38,6 @@ dist/
 .sass-cache
 _asset_bundler_cache
 _site
+
+# Python
+__pycache__/
