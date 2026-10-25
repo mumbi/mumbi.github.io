@@ -2,7 +2,7 @@
 
 좋은 개발 글은 독자가 이해하는 데 드는 비용이 작고, 믿을 수 있으며, 다른 곳에서 얻을 수 없는 판단을 담는다. 읽기 쉬운 글은 출발점이고, 다시 찾아보게 만드는 것은 깊이와 신뢰성이다.
 
-근거: Michael Lynch, [Anti-Patterns in Software Blogging](https://refactoringenglish.com/blog/anti-patterns-software-blogging/) (2026-10-07)와 그에 대한 검토 의견을 종합했다. 규칙 번호(R1~R23)는 채점 스킬 `blog-post-rubric`이 참조하므로 바꾸지 않는다.
+근거: Michael Lynch, [Anti-Patterns in Software Blogging](https://refactoringenglish.com/blog/anti-patterns-software-blogging/) (2024-10-07)와 그에 대한 검토 의견을 종합했다. 규칙 번호(R1~R23)는 채점 스킬 `blog-post-rubric`이 참조하므로 바꾸지 않는다.
 
 ## 1. 시작: 독자가 5초 안에 판단하게 한다
 
