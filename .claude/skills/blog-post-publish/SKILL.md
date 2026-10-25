@@ -81,23 +81,25 @@ graph.in.repo_dir (text)   graph.in.topic (text)   graph.in.materials_dir (text)
 모든 명령은 이 SKILL.md가 있는 디렉터리에서 실행한다 — graph.json은 그 디렉터리의 것이다.
 
 ```bash
-BIN="/c/Users/예의상/Desktop/workspaces/claude-plugins/plugins/recipe/tools/pipecheck/dist/pipecheck-windows-amd64.exe"
+OS=$(uname -s | tr A-Z a-z); EXT=""
+case "$OS" in mingw*|msys*|cygwin*) OS=windows; EXT=".exe" ;; esac  # Windows Git Bash 는 uname -s 가 MINGW64_NT-… 등
+NAME="pipecheck-$OS-$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')$EXT"
 SKILLS_PROJECT="$(cd .. && pwd)"   # 이 SKILL.md 가 있는 디렉터리의 상위 = 프로젝트 .claude/skills
 SKILLS_USER="$HOME/.claude/skills"
-BUILD="/c/Users/예의상/Desktop/workspaces/claude-plugins/plugins/recipe/tools/pipecheck/build.sh"
-if [ ! -e "$BIN" ]; then   # 플러그인 업데이트로 버전 디렉터리가 바뀐 경우
-  BASE="${BIN%/tools/pipecheck/dist/*}"; NAME="${BIN##*/}"
+BIN="${PIPECHECK_BIN:-$(command -v pipecheck 2>/dev/null)}"; BUILD=""
+if [ -z "$BIN" ] || [ ! -e "$BIN" ]; then   # recipe 플러그인 캐시에서 가장 높은 버전을 찾는다
+  BIN=""
   while IFS= read -r D; do
     if [ -e "${D}tools/pipecheck/build.sh" ]; then
       BIN="${D}tools/pipecheck/dist/$NAME"; BUILD="${D}tools/pipecheck/build.sh"; break
     fi
-  done < <(ls -d "${BASE%/*}"/*/ 2>/dev/null | sort -V -r)
+  done < <(ls -d "${CLAUDE_CONFIG_DIR:-$HOME/.claude}"/plugins/cache/*/recipe/*/ 2>/dev/null | sort -V -r)
 fi
 ```
-기록한 `$BIN`이 없으면 위 블록이 기록 경로의 버전 디렉터리를 형제 중 가장 높은 버전으로
-바꿔 다시 찾는다 — 플러그인 캐시는 버전별 디렉터리라 업데이트하면 옛 경로가 사라진다.
-그래도 `$BIN`이 없으면 `"$BUILD"`를 먼저 실행해 만든다(파일 시각은 설치·체크아웃 때
-새로 찍혀 소스 변경 판단에 쓰지 않는다). 빌드가 실패하면 — `$BUILD`가 없는 경우도 같다 — 그 출력을
+`$BIN`은 `PIPECHECK_BIN` 환경 변수, `PATH`의 `pipecheck`, recipe 플러그인 캐시(버전 디렉터리 중
+가장 높은 것) 순서로 찾는다 — 플러그인 캐시는 버전별 디렉터리라 업데이트하면 옛 경로가 사라진다.
+`$BIN`이 없으면 `"$BUILD"`를 먼저 실행해 만든다(파일 시각은 설치·체크아웃 때
+새로 찍혀 소스 변경 판단에 쓰지 않는다). 빌드가 실패하면 — `$BUILD`가 비었거나 없는 경우도 같다 — 그 출력을
 보고하고 오류로 끝내며 `/pipeline` 재컴파일을 안내한다.
 pipecheck 출력은 한 줄 JSON, 불통과는 exit 1. exit 2는 호출 오류 —
 명령을 고쳐 같은 호출을 다시 부르는 연속 시도를 3회까지 하고, 그래도
