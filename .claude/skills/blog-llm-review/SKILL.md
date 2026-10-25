@@ -28,6 +28,7 @@ node:
 2. 실행: `bash <oneshot 스킬 디렉터리>/references/oneshot.sh --mode read --prompt-file <프롬프트 파일> <reviewer>` 를 `worktree_dir` 에서 실행한다. `<oneshot 스킬 디렉터리>` 는 설치된 recipe 플러그인의 실제 경로로 바꾼다
 3. 종료 코드 0 또는 3(강등 — stdout 에 결과 있음)이면 stdout 에서 JSON 배열을 뽑는다. 그 밖이거나 JSON 이 아니면 한 번 다시 실행하고, 그래도 실패하면 `{"severity": "P1", "category": "rules", "location": "-", "issue": "<reviewer> 리뷰 실패: <요약>", "suggestion": "수동 리뷰"}` 하나를 낸다
 4. 각 항목에 `"reviewer": <reviewer>` 를 붙인다
+5. 1의 임시 디렉터리는 성공·실패와 관계없이 지운다
 
 ## 출력
 - `findings` — 지적 객체 배열(`severity`·`category`·`location`·`issue`·`suggestion`·`reviewer`). 지적이 없으면 빈 배열

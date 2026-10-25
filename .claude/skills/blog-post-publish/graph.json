@@ -65,11 +65,11 @@
     { "name": "blog-post-plan", "scope": "project", "contract": "sha256:d2540c98cdfda85bcb64f28372dbf8cd58c9c7e375cc0b0dc4819a5a6fe2fbf6", "body": "sha256:72fba9603c41315b114ee051924ad555f0eb5be0de7ce7910c24abaf0eed4d59" },
     { "name": "blog-attachments-prepare", "scope": "project", "contract": "sha256:2d500b1eba1395a12801a138ed7089d3e825740588db4e20c2cdbd920f9e3a24", "body": "sha256:8e3965b65d9a35d7a982abf21f4e9f6f12f9a2b276177106bcfd5389483b1e9a" },
     { "name": "github-issue-attach", "scope": "project", "contract": "sha256:dc10178dfe77c4236bf3453b22ed3cf6546b5762d64bcf7988caf36e45c173a0", "body": "sha256:2d063c55488242b2ad3dbeb95162149a2b2b21af67810ef3ee6d081de91b9416" },
-    { "name": "blog-post-draft", "scope": "project", "contract": "sha256:e38d92cb39202525709af1e1d65f473b84570f04d7ab672d55692bc8fd77ad56", "body": "sha256:59bc276c16d471979fe9e6319dfb50414c44176760b1da2a68e8bb53c1adf5e1" },
-    { "name": "blog-llm-review-round", "scope": "project", "contract": "sha256:40d395d6e9aa882ecd3a373540f5901e10701d8af98adfb7a0525fb3d62ce051", "body": "sha256:aabed100340635330ad7d934a77703240f293310bf6d86414752290454ad4217" },
+    { "name": "blog-post-draft", "scope": "project", "contract": "sha256:e38d92cb39202525709af1e1d65f473b84570f04d7ab672d55692bc8fd77ad56", "body": "sha256:06cbd004277f0bddf0d0275617fb846de7a25df2c54b2d9d84755de7a0c477fc" },
+    { "name": "blog-llm-review-round", "scope": "project", "contract": "sha256:40d395d6e9aa882ecd3a373540f5901e10701d8af98adfb7a0525fb3d62ce051", "body": "sha256:c8dceb32bac9a5a5ef1169dcc922ec17adf528055ba37d9e09f4775e1f7f4aa5" },
     { "name": "blog-post-rubric", "scope": "project", "contract": "sha256:b63666a4c25028bbcc0ec4e7776c3e6f9e97b8fe4a8059f4865eb5527ce2e1d7", "body": "sha256:e2838acb069b150f0030032d439286b6c8a1b8cd8620f2cc19fe3d9af289d6ae" },
     { "name": "blog-post-apply-findings", "scope": "project", "contract": "sha256:11415598bca794761281679a687f004092121536ae5ddb45d41a92e6caff2daf", "body": "sha256:651480266036c7db8f0514b587f45ddf7fcd9b73a7d5eed6a1b8d2eae326dac3" },
-    { "name": "blog-post-review", "scope": "project", "contract": "sha256:cc2ab9d49b12c892f2713b4b2ec1ba24fcfae9850f417863a454106e5b7d84da", "body": "sha256:1fcfb517d4b774863300cf6d22189b5423fef1a251b80d14b388eaaebf2838d9" },
+    { "name": "blog-post-review", "scope": "project", "contract": "sha256:cc2ab9d49b12c892f2713b4b2ec1ba24fcfae9850f417863a454106e5b7d84da", "body": "sha256:d0109652d14bf193249075480b4f4418e24fb037e9f91bbe34407a62ef671796" },
     { "name": "blog-post-pr", "scope": "project", "contract": "sha256:fe1307ea8a9babcc2aa66bf891811f5d284421a71852aedee77b70e11c80eea0", "body": "sha256:934193a7a302212464a3a2977f8911f0b8222371c9b54464aec0e510fa0fc533" },
     { "name": "pr-review-round", "scope": "project", "contract": "sha256:ba6c688e27b434e75fdd5aa7944bf35c11c283b4ba840132df13c80334f686b0", "body": "sha256:84415c49f41ef595ae1e919c3b636894de528eceff4eb7b0c90e65ec9cece3f8" }
   ]

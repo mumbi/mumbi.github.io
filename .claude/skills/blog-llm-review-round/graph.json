@@ -27,7 +27,7 @@
     { "from": "apply.out.clean", "to": "graph.out.clean" }
   ],
   "materials": [
-    { "name": "blog-llm-review", "scope": "project", "contract": "sha256:fb0c69e5b06a8ffd04a2fa8b51987ad15ec9801952a80166b24070fc9d8577dc", "body": "sha256:f83ee5a381b42206d6503c4a17e6410c55d0cc466067f41134e6bd678565144e" },
+    { "name": "blog-llm-review", "scope": "project", "contract": "sha256:fb0c69e5b06a8ffd04a2fa8b51987ad15ec9801952a80166b24070fc9d8577dc", "body": "sha256:394e99bd26a07e8985127435726668fa339ce3efa6bd4b029c8bff7648a3b791" },
     { "name": "blog-post-apply-findings", "scope": "project", "contract": "sha256:11415598bca794761281679a687f004092121536ae5ddb45d41a92e6caff2daf", "body": "sha256:651480266036c7db8f0514b587f45ddf7fcd9b73a7d5eed6a1b8d2eae326dac3" }
   ]
 }
