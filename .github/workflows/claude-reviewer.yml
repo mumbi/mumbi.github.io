@@ -50,23 +50,21 @@ jobs:
           REPO: ${{ github.repository }}
         run: |
           PR_INFO=$(gh pr view "$PR_NUMBER" --json title,body,headRefName,baseRefName,changedFiles,additions,deletions)
-          PR_DIFF=$(gh pr diff "$PR_NUMBER")
+          # diff 와 스레드는 파일로 넘긴다. 프롬프트는 환경 변수로 전달돼 128KiB 를 넘으면 액션이 시작하지 못한다
+          mkdir -p .review-input
+          gh pr diff "$PR_NUMBER" > .review-input/diff.patch
           # 봇이 연 인라인 스레드와 그 답글(최근 100개 코멘트). 같은 지적을 되풀이하지 않게 리뷰어에게 보여 준다
-          THREADS=$(gh api "repos/$REPO/pulls/$PR_NUMBER/comments?per_page=100" --jq '
+          gh api "repos/$REPO/pulls/$PR_NUMBER/comments?per_page=100" --jq '
             group_by(.in_reply_to_id // .id) | map(sort_by(.created_at))
             | map(select(.[0].user.login | endswith("[bot]")))
             | .[] | "### 스레드 \(.[0].id) — \(.[0].path):\(.[0].line // .[0].original_line // "-")",
-                    (.[] | "- \(.user.login): \(.body | gsub("\\s+"; " ") | .[0:600])"), ""')
+                    (.[] | "- \(.user.login): \(.body | gsub("\\s+"; " ") | .[0:600])"), ""' > .review-input/threads.md
+          [ -s .review-input/threads.md ] || echo "(없음)" > .review-input/threads.md
+          wc -c .review-input/*
           {
             echo "PR_INFO<<ENDOFPRINFO"
             echo "$PR_INFO"
             echo "ENDOFPRINFO"
-            echo "PR_DIFF<<ENDOFDIFF"
-            echo "$PR_DIFF"
-            echo "ENDOFDIFF"
-            echo "THREADS<<ENDOFTHREADS"
-            echo "${THREADS:-(없음)}"
-            echo "ENDOFTHREADS"
           } >> "$GITHUB_OUTPUT"
 
       - name: Run Claude Code
@@ -82,17 +80,17 @@ jobs:
             ${{ steps.pr.outputs.PR_INFO }}
 
             ## 변경 내용 (diff)
-            ${{ steps.pr.outputs.PR_DIFF }}
+            `.review-input/diff.patch` 를 Read 로 끝까지 읽습니다. 길면 offset·limit 으로 나눠 읽습니다
 
             ## 기존 리뷰 스레드
-            ${{ steps.pr.outputs.THREADS }}
+            `.review-input/threads.md` 를 Read 로 읽습니다
 
             ## 이번 실행을 부른 코멘트
             스레드 ${{ github.event.comment.in_reply_to_id || github.event.comment.id }}: ${{ github.event.comment.body }}
             (비어 있으면 새 커밋으로 시작된 리뷰입니다)
 
             ## 리뷰 지침
-            - 위 diff를 분석하여 코드 품질, 보안, 성능 문제를 점검합니다
+            - diff 를 분석하여 코드 품질, 보안, 성능 문제를 점검합니다
             - `.claude/`, `CLAUDE.md`, `.mcp.json` 등 에이전트 설정 경로는 작업 폴더에서 기본 브랜치 것으로 바뀌어 있습니다. 이 경로의 PR 버전은 `.claude-pr/` 아래에 있으니, 파일을 열어 확인할 때는 그쪽을 읽습니다
             - 지적은 PR head 의 파일을 열어 확인한 것만 남깁니다. 지적마다 `파일:줄` 과 그 줄의 코드를 그대로 인용하고, 인용할 수 없으면 지적하지 않습니다
             - 기존 리뷰 스레드에서 이미 반영됐거나, 작성자가 이유를 달아 반영하지 않기로 한 지적은 다시 내지 않습니다. 그 이유가 코드와 맞지 않을 때만, 그 스레드에 답글로 코드 인용과 함께 반박합니다
