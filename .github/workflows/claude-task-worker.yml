@@ -64,7 +64,7 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           allowed_bots: "*"
-          claude_args: "--model claude-sonnet-4-5-20250929 --allowedTools Edit Write Read Glob Grep 'Bash(git:*)' 'Bash(gh:*)'"
+          claude_args: "--model claude-opus-5-5 --allowedTools Edit Write Read Glob Grep 'Bash(git:*)' 'Bash(gh:*)'"
           prompt: |
             이슈에 기술된 작업을 수행해주세요.
             AskUserQuestion 도구를 사용하지 마세요. 모든 작업을 자율적으로 수행하세요.
