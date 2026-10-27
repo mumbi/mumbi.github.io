@@ -62,7 +62,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          claude_args: "--model claude-sonnet-4-5-20250929 --permission-mode default --allowedTools Edit Write Read Glob Grep 'Bash(git:*)' 'Bash(gh:*)'"
+          claude_args: "--model claude-opus-5-5 --permission-mode default --allowedTools Edit Write Read Glob Grep 'Bash(git:*)' 'Bash(gh:*)'"
           allowed_bots: "claude[bot]"
           prompt: |
             PR #${{ github.event.pull_request.number }} 에 changes_requested 리뷰가 제출되었습니다.
