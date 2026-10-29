@@ -20,7 +20,7 @@ node:
    - 에이전트 지침: `AGENTS.md`, `CLAUDE.md`, `.claude/CLAUDE.md` 와 거기서 `@` 로 참조하는 문서(예: `docs/tech-stack.md`)
    - 정적 사이트 생성기 판별: `config/`·`hugo.toml`(Hugo) 또는 `_config.yml`(Jekyll), 테마 서브모듈(`.gitmodules`)
    - 글 디렉터리(`content/posts` 또는 `_posts`)의 최근 글 5개 프론트매터 — `git ls-tree -r --name-only` 로 찾고 파일명 날짜순
-   - `.github/workflows/*.yml` 의 `on:` 과 `if:` — 이슈·댓글·PR 이벤트로 도는 자동화와 그 트리거 문자열(예: 본문에 `@claude` 가 있으면 작업 에이전트 실행)
+   - `.github/workflows/*.yml` 의 `on:` 과 `if:` — 이슈·댓글·PR 이벤트로 도는 자동화와 그 트리거 문자열(예: PR 댓글에 `@claude` 가 있으면 리뷰 에이전트가 답함)
 4. 저장소 규칙 API 로 병합 조건을 읽는다: `gh api repos/<owner/name>/rules/branches/<기본>` (gh 미인증이면 이 항목은 `null` 로 두고 `notes` 에 적는다)
 5. 최근 글의 커밋 작성자를 `git log origin/<기본> --format='%an <%ae>' -- <글 디렉터리>` 로 확인한다
 6. 최근 글들이 카테고리를 태그에도 넣는지 본다. 섞여 있으면 가장 최근 글의 방식을 `tag_style` 로 정하고 그 사실을 `notes` 에 적는다
