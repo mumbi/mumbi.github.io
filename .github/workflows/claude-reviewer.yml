@@ -39,6 +39,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           EVENT: ${{ github.event_name }}
+          ACTION: ${{ github.event.action }}
           IN_REPLY_TO: ${{ github.event.comment.in_reply_to_id }}
           BODY: ${{ github.event.comment.body }}
         run: |
@@ -55,7 +56,7 @@ jobs:
           gh pr view "$PR_NUMBER" --repo "$REPO" --json baseRefName,headRefOid \
             --jq '"base=\(.baseRefName)\nhead=\(.headRefOid)"' >> "$GITHUB_OUTPUT"
           echo "mode=$mode" >> "$GITHUB_OUTPUT"
-          echo "mode=$mode"
+          echo "mode=$mode action=$ACTION"
 
       - name: Checkout PR head
         if: steps.gate.outputs.mode != 'skip'
@@ -101,7 +102,12 @@ jobs:
           fi
           git show "origin/$BASE:$script" > "$RUNNER_TEMP/review_input.py"
           python3 -I "$RUNNER_TEMP/review_input.py"
-          echo "ready=true" >> "$GITHUB_OUTPUT"
+          if [ -f .review-input/skip ]; then
+            echo "::notice::$(cat .review-input/skip)"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Run Claude Code
         if: steps.input.outputs.ready == 'true'

@@ -99,21 +99,39 @@ reviews = [r for page in pages for r in page
            if r["user"]["login"] == BOT_REST and r["state"] in ("APPROVED", "CHANGES_REQUESTED", "DISMISSED")]
 last = reviews[-1] if reviews else None
 
+
+def reviewed_commit(review):
+    """판정이 실제로 본 커밋. base 만 병합한 push 는 approve 를 무효로 만들지 않고 commit_id 를 새 head 로 옮긴다.
+    commit_id 가 판정보다 나중에 만들어졌으면 판정 시각에 head 였던 first-parent 커밋으로 되돌린다"""
+    sha = review["commit_id"]
+    if subprocess.run(["git", "cat-file", "-e", f"{sha}^{{commit}}"], capture_output=True).returncode:
+        return sha
+    made = datetime.fromisoformat(run("git", "show", "-s", "--format=%cI", sha).strip())
+    if made <= datetime.fromisoformat(review["submitted_at"].replace("Z", "+00:00")):
+        return sha
+    return run("git", "rev-list", "-1", "--first-parent", f"--before={review['submitted_at']}", sha).strip() or sha
+
+
+last_sha = reviewed_commit(last) if last else None
+
 diff = run("git", "-c", "core.quotepath=false", "diff", "--no-color", "-M", f"origin/{base}...HEAD")
 write("diff.patch", diff or "(변경 없음)")
 
 if not last:
     since_note = "첫 리뷰입니다. 비교할 이전 리뷰가 없습니다"
     write("since-last.patch", "(첫 리뷰)")
-elif last["commit_id"] == head:
+elif last_sha == head:
     since_note = "마지막 리뷰 뒤로 새 커밋이 없습니다"
     write("since-last.patch", "(새 커밋 없음)")
-elif subprocess.run(["git", "cat-file", "-e", f"{last['commit_id']}^{{commit}}"], capture_output=True).returncode:
+    if MODE == "push":
+        # 같은 head 에 push 이벤트가 두 번 오기도 한다. 이미 판정한 head 는 다시 리뷰하지 않는다
+        write("skip", f"`{head[:7]}` 는 이미 판정했습니다. 다시 리뷰하려면 @claude 로 요청합니다")
+elif subprocess.run(["git", "cat-file", "-e", f"{last_sha}^{{commit}}"], capture_output=True).returncode:
     since_note = "마지막 리뷰 커밋을 찾을 수 없습니다(force push 로 보임). 전체 diff 로 판단합니다"
     write("since-last.patch", "(마지막 리뷰 커밋 없음)")
 else:
-    since = run("git", "-c", "core.quotepath=false", "diff", "--no-color", "-M", last["commit_id"], "HEAD")
-    since_note = f"`{last['commit_id'][:7]}..{head[:7]}` 의 변경입니다. 그 사이 base 를 병합했다면 base 의 변경도 섞여 있습니다"
+    since = run("git", "-c", "core.quotepath=false", "diff", "--no-color", "-M", last_sha, "HEAD")
+    since_note = f"`{last_sha[:7]}..{head[:7]}` 의 변경입니다. 그 사이 base 를 병합했다면 base 의 변경도 섞여 있습니다"
     write("since-last.patch", since or "(변경 없음)")
 
 # --- 바뀐 파일 목차 ----------------------------------------------------------
@@ -228,7 +246,7 @@ else:
 # --- 실행 상황 ---------------------------------------------------------------
 today = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d")
 last_state = "DISMISSED(새 커밋으로 무효가 됨)" if last and last["state"] == "DISMISSED" else (last or {}).get("state")
-last_line = (f"`{last['commit_id'][:7]}` 에서 {last_state} ({last['submitted_at'][:10]})" if last else "없음")
+last_line = (f"`{last_sha[:7]}` 에서 {last_state} ({last['submitted_at'][:10]})" if last else "없음")
 write("context.md", "\n".join([
     "# 실행 상황", "",
     f"- 오늘 날짜(KST): {today}. 이보다 앞선 날짜를 미래라고 판단하지 않습니다",
