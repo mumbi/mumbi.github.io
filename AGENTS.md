@@ -108,12 +108,17 @@ mumbi.github.io(mumbi.net) 블로그의 글 작성과 발행을 전담하는 블
 
 # 자동화 파이프라인
 
-이슈 기반 자동화 파이프라인. 세부 지침은 `.github/workflows/` 의 각 워크플로우 파일 참조.
+GitHub Actions 에는 리뷰 에이전트 하나만 있다. 글 작성과 리뷰 반영은 로컬의 `/blog-post-publish`(리뷰 대응은 그 안의 `pr-review-round`)가 맡는다. 세부 지침은 `.github/workflows/claude-reviewer.yml` 참조.
 
 ```
-이슈 생성 (@claude) → 작업 에이전트 → PR 생성 → 리뷰 에이전트 → approve/changes_requested
+PR 커밋 push → 리뷰 에이전트 → 인라인 지적 + approve/changes_requested
+지적 스레드에 답글 → 리뷰 에이전트 → 철회·resolve 또는 반박 (판정이 바뀌면 다시 제출)
+@claude 멘션 → 리뷰 에이전트 → 답글
 ```
 
-- **작업 에이전트** (`claude-task-worker.yml`): 이슈 작업 수행 → 커밋 → PR 생성
-- **리뷰 에이전트** (`claude-reviewer.yml`): PR 자동 리뷰
-- **피드백 에이전트** (`claude-feedback-worker.yml`): 리뷰 피드백 반영 → 커밋
+- **리뷰 에이전트** (`claude-reviewer.yml`)
+  - 새 커밋: 자기가 연 스레드가 고쳐졌는지 확인해 resolve 하고, 새 변경을 리뷰해 판정을 낸다
+  - 자기 스레드의 답글: `@claude` 없이도 반응한다. 반론이 맞으면 철회하고 resolve 하며, 틀리면 코드를 인용해 반박한다
+  - `@claude` 멘션: 인라인 스레드와 PR 대화 모두에서 답한다
+  - 판정: 자기가 연 스레드 중 열린 P1·P2 가 남으면 changes_requested, 없으면 approve
+  - 처음 읽을 컨텍스트(`.review-input/`)는 `.github/scripts/review_input.py` 가 만든다. 실행은 base 브랜치의 스크립트로 한다
