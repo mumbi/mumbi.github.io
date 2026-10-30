@@ -94,8 +94,9 @@ write("pr.md", "\n".join(lines))
 
 # --- 마지막 리뷰와 이후 변경 ----------------------------------------------
 pages = gh_json("api", f"repos/{REPO}/pulls/{PR}/reviews?per_page=100", "--paginate", "--slurp")
+# 새 커밋이 올라오면 이전 판정은 DISMISSED 로 바뀐다. 그래도 그 커밋까지는 판정한 것이다
 reviews = [r for page in pages for r in page
-           if r["user"]["login"] == BOT_REST and r["state"] in ("APPROVED", "CHANGES_REQUESTED")]
+           if r["user"]["login"] == BOT_REST and r["state"] in ("APPROVED", "CHANGES_REQUESTED", "DISMISSED")]
 last = reviews[-1] if reviews else None
 
 diff = run("git", "-c", "core.quotepath=false", "diff", "--no-color", "-M", f"origin/{base}...HEAD")
@@ -226,7 +227,8 @@ else:
 
 # --- 실행 상황 ---------------------------------------------------------------
 today = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d")
-last_line = (f"`{last['commit_id'][:7]}` 에서 {last['state']} ({last['submitted_at'][:10]})" if last else "없음")
+last_state = "DISMISSED(새 커밋으로 무효가 됨)" if last and last["state"] == "DISMISSED" else (last or {}).get("state")
+last_line = (f"`{last['commit_id'][:7]}` 에서 {last_state} ({last['submitted_at'][:10]})" if last else "없음")
 write("context.md", "\n".join([
     "# 실행 상황", "",
     f"- 오늘 날짜(KST): {today}. 이보다 앞선 날짜를 미래라고 판단하지 않습니다",
