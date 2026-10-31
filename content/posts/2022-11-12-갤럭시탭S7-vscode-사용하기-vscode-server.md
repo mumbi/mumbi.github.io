@@ -176,8 +176,6 @@ Open this link in your browser https://insiders.vscode.dev/+ms-vscode.remote-ser
 
 <https://vscode.dev> 에 접속한 후 `폴더 열기` 를 누릅니다.
 
-![터널로 galaxytab-s7 에 연결된 VS Code Insiders 시작 화면](https://user-images.githubusercontent.com/261637/201477732-4cb9c1cf-f6b2-4a3a-9d2b-f8dd47fe28c7.png)
-
 로컬 열기가 지원되지 않는다고 하는데 `원격 열기` 를 누릅니다.
 
 ![vscode.dev 에서 폴더 열기를 누르면 뜨는 '로컬 폴더 열기가 지원되지 않습니다' 대화 상자. 원격 열기 버튼이 강조되어 있다](https://user-images.githubusercontent.com/261637/201477821-e38fda93-9098-49b3-a202-bbaf5914f993.png)
