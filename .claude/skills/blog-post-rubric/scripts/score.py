@@ -25,13 +25,16 @@ def normalize(text):
 
 def extract_json(raw):
     try:
-        return json.loads(raw)
+        data = json.loads(raw)
     except json.JSONDecodeError:
-        pass
-    start, end = raw.find("{"), raw.rfind("}")
-    if start < 0 or end <= start:
-        raise ValueError("출력에서 JSON 객체를 찾지 못했다")
-    return json.loads(raw[start : end + 1])
+        start, end = raw.find("{"), raw.rfind("}")
+        if start < 0 or end <= start:
+            raise ValueError("출력에서 JSON 객체를 찾지 못했다")
+        data = json.loads(raw[start : end + 1])
+    # 배열·문자열 JSON 이면 뒤에서 .get 이 예외로 끝나 errors 를 내지 못한다
+    if not isinstance(data, dict):
+        raise ValueError(f"JSON 객체가 아니라 {type(data).__name__} 이다")
+    return data
 
 
 def na_allowed(item, post_type):
@@ -59,7 +62,17 @@ def validate(rubric, review, post_text):
 
     auto_ids = {i["id"] for i in rubric["items"] if i.get("auto")}
     by_id = {}
-    for entry in review.get("items", []):
+    entries = review.get("items", [])
+    if not isinstance(entries, list):
+        errors.append(f"items 는 배열이어야 한다: {type(entries).__name__}")
+        entries = []
+    elif not all(isinstance(e, dict) for e in entries):
+        errors.append("items 의 원소는 모두 객체여야 한다")
+        entries = [e for e in entries if isinstance(e, dict)]
+    for entry in entries:
+        if not isinstance(entry.get("evidence", ""), (str, type(None))):
+            errors.append(f"{entry.get('id')} evidence 는 문자열이어야 한다")
+            entry["evidence"] = ""
         if entry.get("id") in auto_ids:
             continue  # 채점자가 자동 항목을 내도 거부하지 않고 버린다. 다시 시킬 이유가 없다
         if entry.get("id") in by_id:
@@ -136,7 +149,7 @@ def compute(rubric, review, reviewer, post_text):
     warnings = [
         f"{e['id']} evidence 가 {len(e['evidence'])}자로 길다. 핵심 문장만 인용하면 검토가 쉽다"
         for e in items
-        if len(e.get("evidence", "")) > 200
+        if len(e.get("evidence") or "") > 200
     ]
     if len(na_ids) >= NA_WARN:
         warnings.append(f"N/A 가 {len(na_ids)}개다({', '.join(na_ids)}). 남은 항목만으로 절 점수가 정해지므로 N/A 조건을 다시 확인한다")

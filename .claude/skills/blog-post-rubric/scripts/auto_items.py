@@ -20,6 +20,8 @@ KNOWN_SCHEMES = {"http", "https", "mailto", "ftp", "file", "tel", "ssh", "git", 
 MEANINGLESS_ALT = {"", "image", "img", "picture", "photo", "screenshot", "스크린샷", "이미지", "사진", "그림", "캡처"}
 IMAGE_EXT = re.compile(r"\.(png|jpe?g|gif|webp|svg|bmp)$", re.I)
 MARKUP = re.compile(r"[`*\[\]<>]")  # 화면에 보이지 않는 마크다운 기호
+HEADING = re.compile(r"^ {0,3}#{1,6}(\s|$)")
+BLOCK_START = re.compile(r"^ {0,3}(#{1,6}(\s|$)|[-*+]\s|\d{1,9}[.)]\s|>)")  # 앞 문단을 끝내고 새 블록을 여는 줄
 
 LONG_TOKEN = 45  # 모바일 한 줄에 영문 40자 정도가 들어간다. 경계에 걸리는 API 이름까지 잡지 않도록 여유를 둔다
 LONG_CODE_LINE = 100
@@ -130,21 +132,37 @@ def check(text):
             continue
         i += 1
 
+    # 코드 스팬은 문단 안에서 줄을 넘을 수 있어서, 백틱 짝은 문단 단위로 본다
+    paragraph = []
+
+    def flush():
+        if not paragraph:
+            return
+        joined = "\n".join(l for _, l in paragraph)
+        pos = unmatched_backtick(joined)
+        if pos is not None:
+            no, line = paragraph[joined.count("\n", 0, pos)]
+            col = pos - (joined.rfind("\n", 0, pos) + 1)
+            broken.append((no, line[max(0, col - 20) : col + 20].strip(), "짝이 맞지 않는 백틱"))
+        paragraph.clear()
+
     for no, line in prose:
-        if no in table_lines:
+        if no in table_lines or not line.strip():
+            flush()
             continue
+        if paragraph and (no != paragraph[-1][0] + 1 or BLOCK_START.match(line) or HEADING.match(paragraph[-1][1])):
+            flush()
+        paragraph.append((no, line))
         # 링크 주소는 화면에 보이지 않으므로 빼고, 남은 마크다운 기호도 빼고 잰다
         visible = MARKUP.sub("", LINK_TARGET.sub("] ", line))
         token = max(visible.split(), key=len, default="")
         if len(token) >= LONG_TOKEN:
             overflow.append((no, token, f"공백 없는 {len(token)}자 문자열"))
-        pos = unmatched_backtick(line)
-        if pos is not None:
-            broken.append((no, line[max(0, pos - 20) : pos + 20].strip(), "짝이 맞지 않는 백틱"))
         stripped = re.sub(r"`[^`]*`", "", line)
         for m in AUTOLINK.finditer(stripped):
             if m.group(1).lower() not in KNOWN_SCHEMES:
                 broken.append((no, m.group(0), f"'{m.group(1)}:' 를 스킴으로 읽는 자동 링크"))
+    flush()
 
     # 코드 블록은 블록 안에서만 가로 스크롤되고 로그처럼 줄일 수 없는 줄도 많다.
     # 페이지 전체가 밀리는 본문 넘침보다 가벼우므로, 블록이 몇 개든 합쳐서 하나로 센다
