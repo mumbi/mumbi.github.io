@@ -153,8 +153,11 @@ def compute(rubric, review, reviewer, post_text):
     ]
     if len(na_ids) >= NA_WARN:
         warnings.append(f"N/A 가 {len(na_ids)}개다({', '.join(na_ids)}). 남은 항목만으로 절 점수가 정해지므로 N/A 조건을 다시 확인한다")
+    pass_line = rubric.get("pass_line")
     score = {
         "total": round(total),
+        "pass_line": pass_line,
+        "passed": None if pass_line is None else round(total) >= pass_line,
         "type": review["type"],
         "type_evidence": review.get("type_evidence", ""),
         "reviewer": reviewer,

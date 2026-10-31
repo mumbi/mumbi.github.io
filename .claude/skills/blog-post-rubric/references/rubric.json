@@ -1,5 +1,6 @@
 {
-  "version": 4,
+  "version": 5,
+  "pass_line": 70,
   "types": ["problem", "choice", "tutorial", "retrospective", "note"],
   "sections": [
     { "id": "opening", "title": "시작", "weight": 15 },
