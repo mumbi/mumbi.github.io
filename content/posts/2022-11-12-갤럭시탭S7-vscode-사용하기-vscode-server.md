@@ -168,7 +168,7 @@ Open this link in your browser https://insiders.vscode.dev/+ms-vscode.remote-ser
 
 출력된 URL 로 접속하면 초기 설정이 진행되는데 github tunnel 을 사용해서 그런지 시간이 꽤 걸립니다.
 
-![image](https://user-images.githubusercontent.com/261637/201477487-fcb80724-bbaa-4f60-9085-76234864460d.png)
+![insiders.vscode.dev/tunnel/galaxytab-s7 로 연결된 VS Code Insiders 시작 화면. 왼쪽 아래 상태 표시줄에 기기 이름 galaxytab-s7 이 보인다](https://user-images.githubusercontent.com/261637/201477487-fcb80724-bbaa-4f60-9085-76234864460d.png)
 
 서버와 연결이 완료된 모습입니다.
 
@@ -176,33 +176,33 @@ Open this link in your browser https://insiders.vscode.dev/+ms-vscode.remote-ser
 
 <https://vscode.dev> 에 접속한 후 `폴더 열기` 를 누릅니다.
 
-![image](https://user-images.githubusercontent.com/261637/201477732-4cb9c1cf-f6b2-4a3a-9d2b-f8dd47fe28c7.png)
+![터널로 galaxytab-s7 에 연결된 VS Code Insiders 시작 화면](https://user-images.githubusercontent.com/261637/201477732-4cb9c1cf-f6b2-4a3a-9d2b-f8dd47fe28c7.png)
 
 로컬 열기가 지원되지 않는다고 하는데 `원격 열기` 를 누릅니다.
 
-![image](https://user-images.githubusercontent.com/261637/201477821-e38fda93-9098-49b3-a202-bbaf5914f993.png)
+![vscode.dev 에서 폴더 열기를 누르면 뜨는 '로컬 폴더 열기가 지원되지 않습니다' 대화 상자. 원격 열기 버튼이 강조되어 있다](https://user-images.githubusercontent.com/261637/201477821-e38fda93-9098-49b3-a202-bbaf5914f993.png)
 
 `Tunnel에 연결` 을 누릅니다.
 
 `Tunnel에 연결` 이 안나오고 `Visual Studio Code 다운로드` 만 보일 때가 있는데 조금 기다리면 나옵니다.
 
-![image](https://user-images.githubusercontent.com/261637/201477900-8bc2f896-5ead-4ef9-b4a4-5de034397090.png)
+![vscode.dev 의 원격 열기 메뉴. 'Tunnel에 연결...' 항목이 선택되어 있다](https://user-images.githubusercontent.com/261637/201477900-8bc2f896-5ead-4ef9-b4a4-5de034397090.png)
 
 GitHub 을 사용하여 로그인하려 한다고 할 때 `허용` 을 누릅니다.
 
-![image](https://user-images.githubusercontent.com/261637/201478087-f54d07f3-e602-419d-bb58-791c0b34264f.png)
+!['확장 Remote Tunnels은(는) GitHub을(를) 사용하여 로그인하려고 합니다' 대화 상자와 허용 버튼](https://user-images.githubusercontent.com/261637/201478087-f54d07f3-e602-419d-bb58-791c0b34264f.png)
 
 로그인이 완료되면 기기 이름으로 입력한 이름을 목록에서 선택합니다.
 
-![image](https://user-images.githubusercontent.com/261637/201478170-81fa2b08-4caf-4b76-b61a-053d89275420.png)
+![vscode.dev 의 터널 기기 목록. Online 상태인 galaxytab-s7 이 맨 위에 선택되어 있다](https://user-images.githubusercontent.com/261637/201478170-81fa2b08-4caf-4b76-b61a-053d89275420.png)
 
 서버에 접속이 완료된 모습입니다.
 
-![image](https://user-images.githubusercontent.com/261637/201478354-22653ca1-0186-42cf-97fb-de5d174719a7.png)
+![vscode.dev/tunnel/galaxytab-s7 에 접속한 VS Code 화면. 상태 표시줄에 galaxytab-s7 이 보인다](https://user-images.githubusercontent.com/261637/201478354-22653ca1-0186-42cf-97fb-de5d174719a7.png)
 
 크롬으로 접속했을 때, `점점점` 메뉴를 누르고 `앱 설치` 를 누르면 Code 앱을 설치할 수 있습니다.
 
-![image](https://user-images.githubusercontent.com/261637/201478452-b520580c-8edd-4db7-8815-085f1f96b88a.png)
+![vscode.dev 를 연 크롬의 점 세 개 메뉴. 앱 설치 항목이 있다](https://user-images.githubusercontent.com/261637/201478452-b520580c-8edd-4db7-8815-085f1f96b88a.png)
 
 안드로이드의 sdcard 를 추가할 수도 있는데 sdcard 는 보안 상의 이유인지 실행 권한을 갖을 수 없습니다.
 

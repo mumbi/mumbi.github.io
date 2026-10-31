@@ -47,7 +47,7 @@ Visual Studio Code(이하 vscode) 는 확장을 통해 IDE 를 구성할 수 있
 
 CMake Tools 확장을 설치합니다.
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/37fb114a-f1d8-4295-b67b-6ac47064ee96)
+![VS Code 확장 목록의 CMake Tools(Microsoft) 항목](https://github.com/mumbi/mumbi.github.io/assets/261637/37fb114a-f1d8-4295-b67b-6ac47064ee96)
 
 CMakeLists.txt 파일을 생성하기 전에는 왼쪽 사이드바에 아직 보이지 않습니다.
 
@@ -167,43 +167,43 @@ configuration 을 cmake cli 로 시작할 수 있지만, CMake Tools 확장을 �
 
 vscode 를 재시작하거나, 
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/edae50a0-fc48-4432-aa70-9dcec1654c40)
+![탐색기에서 CMakeLists.txt 를 우클릭한 메뉴. 맨 아래 Configure All Projects 에 빨간 테두리가 있다](https://github.com/mumbi/mumbi.github.io/assets/261637/edae50a0-fc48-4432-aa70-9dcec1654c40)
 
 CMakeLists.txt 파일을 우클릭하면 나오는 메뉴에서 [Configure All Projects] 를 선택하면 CMake Tools 아이콘이 생깁니다.
 
 또한 방금 생성된 preset 으로 configuration 을 시작할 수 있습니다.
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/90788df6-3072-4d18-b6e8-02f81b03dbab)
+!['Select a configure preset for app' 목록에서 'conan-default' config 를 고르는 화면](https://github.com/mumbi/mumbi.github.io/assets/261637/90788df6-3072-4d18-b6e8-02f81b03dbab)
 
 ['conan-default' config] 를 선택하면 configuration 이 시작됩니다.
 
 왼쪽 사이드바에서 CMake Tools 아이콘이 보이고 해당 탭에서는 프로젝트 빌드 환경을 볼 수 있습니다.
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/fe9d1dfb-f13c-446c-9dbc-02cb131e1d12)
+![CMake Tools 탭의 PROJECT STATUS. Configure 는 'conan-default' config, Build·Test 는 conan-debug 다](https://github.com/mumbi/mumbi.github.io/assets/261637/fe9d1dfb-f13c-446c-9dbc-02cb131e1d12)
 
 CMake Tools 탭에서 [Configure] - ['conan-default' config] 오른쪽의 연필 모양의 아이콘을 누르면 configuration 할 preset 을 선택할 수 있습니다.
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/c486bb86-96af-476e-9042-571a2ebe3b0d)
+![CMake Tools 탭 Configure 항목의 연필 아이콘을 눌러 연 configure preset 선택 목록](https://github.com/mumbi/mumbi.github.io/assets/261637/c486bb86-96af-476e-9042-571a2ebe3b0d)
 
 [Configure] 오른쪽의 화살표 아이콘을 누르면 configuration 이 시작됩니다.
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/f05ca145-8e9e-4795-ace6-86d07b8fa8b5)
+![CMake Tools 탭 Configure 항목 오른쪽의 configure 실행 아이콘](https://github.com/mumbi/mumbi.github.io/assets/261637/f05ca145-8e9e-4795-ace6-86d07b8fa8b5)
 
 ## build
 
 CMake Tools 탭에서 [Build] - [conan-debug] 오른쪽의 연필 모양의 아이콘을 누르면 빌드할 preset 을 선택할 수 있습니다.
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/4ba8b371-9583-4259-9095-988f1b10c0b9)
+![CMake Tools 탭 Build 항목의 연필 아이콘을 눌러 연 build preset 선택 목록. conan-debug 가 선택되어 있다](https://github.com/mumbi/mumbi.github.io/assets/261637/4ba8b371-9583-4259-9095-988f1b10c0b9)
 
 [Build] 오른쪽의 화살표 모양의 아이콘을 누르면 빌드가 시작됩니다.
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/9a76e105-6e63-49e6-885b-0ffeede91cd0)
+![CMake Tools 탭 Build 항목 오른쪽의 빌드 아이콘](https://github.com/mumbi/mumbi.github.io/assets/261637/9a76e105-6e63-49e6-885b-0ffeede91cd0)
 
 ## 실행
 
 [Launch] 오른쪽의 세모 모양의 아이콘을 누르면 빌드한 앱이 실행됩니다.
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/e859aba9-3915-4a65-91f6-8a38561aab81)
+![CMake Tools 탭 Launch 항목 오른쪽의 세모 실행 아이콘](https://github.com/mumbi/mumbi.github.io/assets/261637/e859aba9-3915-4a65-91f6-8a38561aab81)
 
 ```bash
 $ "C:/workspace/app/build/Debug/app.exe"
@@ -220,13 +220,13 @@ app/1.0 test_package
 
 src/main.cpp 파일을 열고, breakpoint 를 설정한 후, 
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/ec530095-e4f4-4d81-90f1-8d39ee2aac72)
+![src/main.cpp 의 6행 app(); 에 빨간 점으로 breakpoint 를 건 화면](https://github.com/mumbi/mumbi.github.io/assets/261637/ec530095-e4f4-4d81-90f1-8d39ee2aac72)
 
 [Debug] 오른쪽의 벌레 세모 모양의 아이콘을 누르면 디버깅이 시작됩니다.
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/63c30782-4cec-40ca-ae26-ccd21bc49082)
+![CMake Tools 탭 Debug 항목 오른쪽의 벌레 모양 디버그 아이콘](https://github.com/mumbi/mumbi.github.io/assets/261637/63c30782-4cec-40ca-ae26-ccd21bc49082)
 
-![Image](https://github.com/mumbi/mumbi.github.io/assets/261637/bec03f5f-2d68-45ba-af98-9d344e12d6e8)
+![디버깅이 6행 breakpoint 에서 멈춰 app(); 줄이 노란색으로 강조된 화면](https://github.com/mumbi/mumbi.github.io/assets/261637/bec03f5f-2d68-45ba-af98-9d344e12d6e8)
 
 ## 의존성 설치
 
