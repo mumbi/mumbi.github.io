@@ -70,11 +70,11 @@ def validate(rubric, review, post_text):
         errors.append("items 의 원소는 모두 객체여야 한다")
         entries = [e for e in entries if isinstance(e, dict)]
     for entry in entries:
+        if entry.get("id") in auto_ids:
+            continue  # 채점자가 자동 항목을 내도 거부하지 않고 버린다. 다시 시킬 이유가 없다
         if not isinstance(entry.get("evidence", ""), (str, type(None))):
             errors.append(f"{entry.get('id')} evidence 는 문자열이어야 한다")
             entry["evidence"] = ""
-        if entry.get("id") in auto_ids:
-            continue  # 채점자가 자동 항목을 내도 거부하지 않고 버린다. 다시 시킬 이유가 없다
         if entry.get("id") in by_id:
             errors.append(f"{entry.get('id')} 가 두 번 나온다")
         by_id[entry.get("id")] = entry
