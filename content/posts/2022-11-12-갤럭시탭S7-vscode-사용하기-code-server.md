@@ -129,11 +129,11 @@ apt update
 apt install vim git
 ```
 
-`vi` 로 `config.yaml` 의 비밀버호를 변경하고 다시 `code-server` 를 실행 시킨 후, 브라우저로 <localhost:8080> 에 접속하여 설정 파일에 입력한 비밀번호를 입력하면 설치가 완료됩니다.
+`vi` 로 `config.yaml` 의 비밀번호를 변경하고 다시 `code-server` 를 실행 시킨 후, 브라우저로 [localhost:8080](http://localhost:8080) 에 접속하여 설정 파일에 입력한 비밀번호를 입력하면 설치가 완료됩니다.
 
-![image](https://user-images.githubusercontent.com/261637/201463178-56493def-324b-4957-98a0-84d4e26552d6.png)
+![브라우저에서 localhost:8080 으로 연 code-server 화면. 아래 터미널 패널에 root@localhost 쉘이 열려 있다](https://user-images.githubusercontent.com/261637/201463178-56493def-324b-4957-98a0-84d4e26552d6.png)
 
-`code-server` 의 장점 중 하나는 터미널 창(`Ctrl + \``) 에서 `ubuntu` 쉘을 사용할 수 있는 것입니다.
+`code-server` 의 장점 중 하나는 터미널 창(`` Ctrl + ` ``) 에서 `ubuntu` 쉘을 사용할 수 있는 것입니다.
 
 # 마무리
 
