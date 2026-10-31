@@ -6,6 +6,7 @@
 import json
 import os
 import re
+import shutil
 import subprocess
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -77,7 +78,12 @@ base = pr["baseRefName"]
 head = run("git", "rev-parse", "HEAD").strip()
 base_sha = run("git", "rev-parse", f"origin/{base}").strip()
 
-OUT.mkdir(parents=True, exist_ok=True)
+# PR 이 같은 경로에 파일(skip 등)이나 링크를 넣어 두었을 수 있다. 남은 것을 지우고 새로 만든다
+if OUT.is_symlink() or OUT.is_file():
+    OUT.unlink()
+elif OUT.exists():
+    shutil.rmtree(OUT)
+OUT.mkdir(parents=True)
 
 lines = [f"# PR #{PR}: {pr['title']}", "", pr["url"], "",
          f"- 브랜치: `{pr['headRefName']}` → `{base}`",
