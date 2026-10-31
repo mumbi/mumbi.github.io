@@ -64,7 +64,7 @@ graph TD
 - 에이전트마다 `AGENT.md`에 페르소나와 행동 규칙을 정의한다
 - 에이전트 간 통신은 파일 기반 메시지 패싱으로 처리한다
 
-```
+```text
 agents/
 ├── planning/
 │   ├── AGENT.md        # 페르소나 정의

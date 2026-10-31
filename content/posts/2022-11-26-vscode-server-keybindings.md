@@ -15,9 +15,9 @@ draft: false
 
 # `복사하기`, `잘라내기`, `붙여넣기` 키 바인딩 
 
-![image](https://user-images.githubusercontent.com/261637/204093781-f0b43edb-a297-4beb-83d2-13da4e00194a.png)
+![왼쪽 아래 톱니바퀴 아이콘을 누르면 나오는 관리 메뉴. 바로 가기 키(Ctrl+K Ctrl+S) 항목에 빨간 표시가 있다](https://user-images.githubusercontent.com/261637/204093781-f0b43edb-a297-4beb-83d2-13da4e00194a.png)
 
-![image](https://user-images.githubusercontent.com/261637/204093945-e7edd9b8-6ac6-49e8-a1f7-85280d909684.png)
+![바로 가기 키 탭 오른쪽 위의 '바로 가기 키 열기(JSON)' 아이콘에 빨간 표시가 있다](https://user-images.githubusercontent.com/261637/204093945-e7edd9b8-6ac6-49e8-a1f7-85280d909684.png)
 
 keybindings.json
 ```json
